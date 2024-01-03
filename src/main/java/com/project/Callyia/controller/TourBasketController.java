@@ -21,6 +21,10 @@ public class TourBasketController {
   @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> handleTourBasketRegistration(@RequestBody TourBasketDTO tourBasketDTO){
     try{
+      if(tourBasketService.isPlaceIdExists(tourBasketDTO.getPlaceId())){
+        log.warn("장바구니 등록 실패: 중복된 placeId입니다.");
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+      }
       Long bno = tourBasketService.handleTourBasketRegistration(tourBasketDTO);
       log.info("장바구니 등록 성공, bno: {}", bno);
       return new ResponseEntity<>(bno, HttpStatus.OK);

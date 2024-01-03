@@ -45,4 +45,6 @@ public interface TourService {
   Page<TourDTO> getAllTours(Pageable pageable);
 
   Page<TourDTO> getSearchTours(String checkColumn, String keyword, Pageable pageable);
+
+  boolean isPlaceNameExists(String placeName);
 }

@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.TourBasketDTO;
+import com.project.Callyia.entity.Tour;
 import com.project.Callyia.entity.TourBasket;
 
 public interface TourBasketService {
@@ -24,4 +25,6 @@ public interface TourBasketService {
   }
 
   Long handleTourBasketRegistration(TourBasketDTO tourBasketDTO);
+
+  boolean isPlaceIdExists(Tour placeId);
 }

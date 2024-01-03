@@ -89,4 +89,9 @@ public class TourServiceImpl implements TourService{
 
     return new PageImpl<>(searchTours, pageable, totalCount);
   }
+
+  @Override
+  public boolean isPlaceNameExists(String placeName) {
+    return tourRepository.existsByPlaceName(placeName);
+  }
 }
