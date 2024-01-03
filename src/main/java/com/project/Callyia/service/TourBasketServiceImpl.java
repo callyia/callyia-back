@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.TourBasketDTO;
+import com.project.Callyia.entity.Tour;
 import com.project.Callyia.entity.TourBasket;
 import com.project.Callyia.repository.TourBasketRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class TourBasketServiceImpl implements TourBasketService{
     log.info("tourBasket: ....." + tourBasket);
     tourBasketRepository.save(tourBasket);
     return tourBasket.getBno();
+  }
+
+  @Override
+  public boolean isPlaceIdExists(Tour placeId) {
+    return tourBasketRepository.existsByPlaceId(placeId);
   }
 }

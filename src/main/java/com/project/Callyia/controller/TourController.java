@@ -65,6 +65,10 @@ public class TourController {
   @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> handleTourRegistration(@RequestBody TourDTO tourDTO) {
     try {
+      if(tourService.isPlaceNameExists(tourDTO.getPlaceName())){
+        log.warn("투어 등록 실패: 중복된 placeName입니다.");
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+      }
       Long placeId = tourService.handleTourRegistration(tourDTO);
       log.info("투어 등록 성공, placeId: {}", placeId);
       return new ResponseEntity<>(placeId, HttpStatus.OK);
