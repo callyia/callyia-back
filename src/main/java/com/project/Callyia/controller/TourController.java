@@ -5,6 +5,7 @@ import com.project.Callyia.entity.Tour;
 import com.project.Callyia.service.TourService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +34,10 @@ import java.util.Map;
 @RequestMapping("/Tour")
 public class TourController {
   private final TourService tourService;
+
+  //aws s3 사용시 활성화
+//  @Autowired
+//  private S3Client s3Client;
 
   @GetMapping("/all")
   public ResponseEntity<Page<TourDTO>> getAllTours(@RequestParam(defaultValue = "1") int page,
@@ -98,4 +105,47 @@ public class TourController {
 
     return ResponseEntity.ok(responseMap);
   }
+
+  //aws s3 사용시 활성화
+//  @PostMapping("/upload")
+//  public ResponseEntity<Map<String, String>> handleImageUpload(@RequestParam("file") MultipartFile file) {
+//    String bucketName = "callyia";
+//    String folderName = "Image_Upload";
+//
+//// 고유한 파일 이름 생성
+//    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+//
+//    uploadFileToS3(bucketName, folderName, fileName, file);
+//
+//    String imageUrl = generateImageUrl(bucketName, folderName, fileName);
+//
+//    Map<String, String> responseMap = new HashMap<>();
+//    responseMap.put("imageUrl", imageUrl);
+//
+//
+//
+//    return ResponseEntity.ok(responseMap);
+//  }
+//
+//
+//
+//  private String generateImageUrl(String bucketName, String folderName, String fileName) {
+//    // S3에 업로드된 이미지 URL 생성
+//    return "https://" + bucketName + ".s3.amazonaws.com/" + folderName + "/" + fileName;
+//  }
+//
+//  private void uploadFileToS3(String bucketName, String folderName, String fileName, MultipartFile file) {
+//    try {
+//      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+//              .bucket(bucketName)
+//              .key(folderName + "/" + fileName)
+//              .build();
+//
+//      // 파일 데이터를 S3에 업로드
+//      s3Client.putObject(putObjectRequest, software.amazon.awssdk.core.sync.RequestBody.fromBytes(file.getBytes()));
+//    } catch (IOException e){
+//      e.printStackTrace();
+//    }
+//  }
+
 }

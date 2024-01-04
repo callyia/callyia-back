@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# AWS Credentials
+cloud.aws.credentials.accessKey
+cloud.aws.credentials.secretKey
