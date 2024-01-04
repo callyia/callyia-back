@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @Table(name = "Schedule")
-public class Schedule { //큰일정
+public class Schedule { //큰 일정
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Schedule")
