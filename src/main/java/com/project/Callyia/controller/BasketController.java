@@ -1,8 +1,8 @@
 package com.project.Callyia.controller;
 
 
-import com.project.Callyia.dto.TourBasketDTO;
-import com.project.Callyia.service.TourBasketService;
+import com.project.Callyia.dto.BasketDTO;
+import com.project.Callyia.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/TourBasket")
-public class TourBasketController {
-  private final TourBasketService tourBasketService;
+@RequestMapping("/Basket")
+public class BasketController {
+  private final BasketService basketService;
 
   @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Long> handleTourBasketRegistration(@RequestBody TourBasketDTO tourBasketDTO){
+  public ResponseEntity<Long> handleBasketRegistration(@RequestBody BasketDTO basketDTO){
     try{
-      if(tourBasketService.isPlaceIdExists(tourBasketDTO.getPlaceId())){
+      if(basketService.isPlaceIdExists(basketDTO.getPlaceId())){
         log.warn("장바구니 등록 실패: 중복된 placeId입니다.");
         return new ResponseEntity<>(HttpStatus.CONFLICT);
       }
-      Long bno = tourBasketService.handleTourBasketRegistration(tourBasketDTO);
+      Long bno = basketService.handleBasketRegistration(basketDTO);
       log.info("장바구니 등록 성공, bno: {}", bno);
       return new ResponseEntity<>(bno, HttpStatus.OK);
     } catch (Exception e){
