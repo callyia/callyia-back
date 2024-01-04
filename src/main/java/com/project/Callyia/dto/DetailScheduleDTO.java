@@ -15,4 +15,5 @@ public class DetailScheduleDTO {
     private String detailImages;
     private String detailContents;
     private Schedule schedule;
+    //asd
 }
