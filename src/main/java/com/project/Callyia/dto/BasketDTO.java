@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TourBasketDTO {
+public class BasketDTO {
   private Long bno;
   private Tour placeId;
 //  private Long userId;
