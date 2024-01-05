@@ -38,4 +38,7 @@ build/
 # AWS Credentials
 cloud.aws.credentials.accessKey
 cloud.aws.credentials.secretKey
+<<<<<<< HEAD
+=======
 
+>>>>>>> d5fa614e4039c18cdc95833cd2eedbd53cea9402
