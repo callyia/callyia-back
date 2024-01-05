@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mid")
-    private String mid; //아이디
+    @Column(name = "mno")
+    private String mno;
 
+    private Long id; //아이디
     private String password; //비밀번호
     private String gender; //성별
     private String nickname; //닉네임

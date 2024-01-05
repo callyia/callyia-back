@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -17,22 +18,35 @@ public class QSchedule extends EntityPathBase<Schedule> {
 
     private static final long serialVersionUID = 1822469189L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QSchedule schedule = new QSchedule("schedule");
 
-    public final SimplePath<Member> member = createSimple("member", Member.class);
+    public final QMember member;
+
+    public final StringPath sName = createString("sName");
 
     public final NumberPath<Long> sno = createNumber("sno", Long.class);
 
     public QSchedule(String variable) {
-        super(Schedule.class, forVariable(variable));
+        this(Schedule.class, forVariable(variable), INITS);
     }
 
     public QSchedule(Path<? extends Schedule> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QSchedule(PathMetadata metadata) {
-        super(Schedule.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QSchedule(PathMetadata metadata, PathInits inits) {
+        this(Schedule.class, metadata, inits);
+    }
+
+    public QSchedule(Class<? extends Schedule> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
     }
 
 }

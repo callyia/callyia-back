@@ -22,6 +22,8 @@ public class QTour extends EntityPathBase<Tour> {
 
     public final StringPath address = createString("address");
 
+    public final ListPath<Basket, QBasket> baskets = this.<Basket, QBasket>createList("baskets", Basket.class, QBasket.class, PathInits.DIRECT2);
+
     public final StringPath checkColumn = createString("checkColumn");
 
     public final StringPath image = createString("image");
@@ -35,8 +37,6 @@ public class QTour extends EntityPathBase<Tour> {
     public final NumberPath<Long> placeId = createNumber("placeId", Long.class);
 
     public final StringPath placeName = createString("placeName");
-
-    public final ListPath<TourBasket, QTourBasket> tourBaskets = this.<TourBasket, QTourBasket>createList("tourBaskets", TourBasket.class, QTourBasket.class, PathInits.DIRECT2);
 
     public QTour(String variable) {
         super(Tour.class, forVariable(variable));
