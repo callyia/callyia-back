@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "tour_basket")
+@Table(name = "Basket")
 public class Basket {
 
     @Id

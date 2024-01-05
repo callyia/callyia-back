@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaAuditing
 @EnableJpaRepositories(basePackages = "com.project.Callyia.repository")
 public class CallyiaApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(CallyiaApplication.class, args);
+        System.out.println("http://localhost:8080/Callyia");
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(CallyiaApplication.class, args);
-		System.out.println("http://localhost:8080/Callyia");
-	}
+
 }

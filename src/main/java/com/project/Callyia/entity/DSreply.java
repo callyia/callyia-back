@@ -17,8 +17,8 @@ public class DSreply { //세부일정댓글
     private String replyContents; //댓글내용
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member; //댓글단유저
+    private Member mno; //댓글단유저
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private DetailSchedule detailSchedule; //세부일정
+    private DetailSchedule dno; //세부일정번호
 }

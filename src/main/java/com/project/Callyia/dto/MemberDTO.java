@@ -1,23 +1,17 @@
-package com.project.Callyia.entity;
+package com.project.Callyia.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-
-@Entity
+@Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@ToString
-@Table(name = "Member")
-public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@AllArgsConstructor
+public class MemberDTO {
     private Long mno;
 
     private String id; //아이디
