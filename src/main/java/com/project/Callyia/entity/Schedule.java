@@ -15,11 +15,10 @@ import java.time.LocalDateTime;
 public class Schedule { //큰 일정
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Schedule")
     private Long sno; //큰일정번호
 
     private String sName; //큰일정이름
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private Member mno;
 }
