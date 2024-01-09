@@ -19,7 +19,7 @@ public class Tour {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "place_id")
+  @Column(name = "place_id", columnDefinition = "BIGINT")
   private Long placeId;
 
   private String placeName;
@@ -43,7 +43,7 @@ public class Tour {
   //성능 저하:
   //
   //모든 변경이나 삭제가 연쇄적으로 발생하므로 성능에 영향을 미칠 수 있습니다. 특히 삭제 연산은 많은 양의 데이터를 처리할 때 성능 저하가 발생할 가능성이 큽니다.
-  @OneToMany(mappedBy = "placeId", cascade = CascadeType.ALL)  // "tour"는 Basket 엔터티에서 선언한 필드명
+  @OneToMany(mappedBy = "placeId", cascade = CascadeType.MERGE)  // "tour"는 Basket 엔터티에서 선언한 필드명
   private List<Basket> baskets;
 
   // 리액트에서 Json형태로 전송시 bigint로 전송이 안되어 number로 전송하였는데 형태가 맞지 않아 변경한 것

@@ -3,8 +3,6 @@ package com.project.Callyia.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Builder
 @AllArgsConstructor
