@@ -111,6 +111,13 @@ public class TourServiceImpl implements TourService{
   }
 
   @Override
+  public List<TourDTO> getSearchTours(String keyword) {
+//    List<Tour> tourList = tourRepository.searchTourList(keyword);
+    List<Tour> tourList = tourRepository.searchTourList(keyword);
+    return tourList.stream().map(tour -> entityToDTO(tour)).collect(Collectors.toList());
+  }
+
+  @Override
   public boolean isPlaceNameExists(String placeName) {
     return tourRepository.existsByPlaceName(placeName);
   }
