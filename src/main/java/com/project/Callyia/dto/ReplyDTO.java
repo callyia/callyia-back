@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DSreplyDTO {
+public class ReplyDTO {
     private Long rno;
+    private String replyerId;
     private String replyContents;
-    private Member member;
     private DetailSchedule detailSchedule;
 }

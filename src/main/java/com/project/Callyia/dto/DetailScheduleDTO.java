@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DetailScheduleDTO {
     private Long dno;
+    private String place;
+    private String content;
+    private double lat; //위도
+    private double lng; //경도
     private String detailImages;
-    private String detailContents;
     private Schedule schedule;
-    //asd
 }

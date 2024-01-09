@@ -12,5 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ScheduleDTO {
     private Long sno;
-    private Member member;
+    private String sName;
+    private long totalDay;
+    private String member;
 }

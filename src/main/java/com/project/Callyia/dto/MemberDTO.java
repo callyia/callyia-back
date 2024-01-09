@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
-    private Long mno;
-
     private String id; //아이디
     private String password; //비밀번호
     private String gender; //성별

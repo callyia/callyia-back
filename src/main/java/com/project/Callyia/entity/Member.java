@@ -6,19 +6,17 @@ import lombok.*;
 import java.time.LocalDate;
 
 
+
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "Member")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mno;
-
     private String id; //아이디
+
     private String password; //비밀번호
     private String gender; //성별
     private String name; //이름
