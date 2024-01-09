@@ -2,6 +2,7 @@ package com.project.Callyia.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Builder
@@ -9,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "Basket")
+@Table(name = "basket")
 public class Basket {
 
     @Id
@@ -18,7 +19,7 @@ public class Basket {
     private Long bno;
 
     @ManyToOne
-    @JoinColumn(name = "place_id", referencedColumnName = "place_id")
+    @JoinColumn(name = "place_id")
     private Tour placeId;
 
 //  @ManyToOne

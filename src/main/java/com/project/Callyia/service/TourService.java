@@ -1,14 +1,9 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.TourDTO;
-import com.project.Callyia.entity.QTour;
 import com.project.Callyia.entity.Tour;
-import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-import java.util.UUID;
 
 public interface TourService {
   Long handleTourRegistration(TourDTO tourDTO);
