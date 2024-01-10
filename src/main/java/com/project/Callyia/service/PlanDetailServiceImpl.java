@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -46,6 +48,18 @@ public class PlanDetailServiceImpl implements PlanDetailService {
   }
 
   @Override
+  public PlanDetailDTO entityToDto(PlanDetail planDetail) {
+    PlanDetailDTO planDetailDTO = PlanDetailDTO.builder()
+        .dno(planDetail.getDno())
+        .pno(planDetail.getPlan().getPno())
+        .placeId(planDetail.getTour().getPlaceId())
+        .sequence(planDetail.getSequence())
+        .build();
+
+    return planDetailDTO;
+  }
+
+  @Override
   public void savePlanDetails(Long pno, PlanDetailDTO[] planDetailDTOs) {
     for(PlanDetailDTO planDetailDTO : planDetailDTOs) {
       log.info("PlanDetailDTO : " + planDetailDTO);
@@ -57,5 +71,14 @@ public class PlanDetailServiceImpl implements PlanDetailService {
   @Override
   public void deleteByPno(Long pno) {
     planDetailRepository.deleteByPlan_Pno(pno);
+  }
+
+  @Override
+  public List<PlanDetailDTO> getFromPno(Long pno) {
+    List<PlanDetail> planDetailList = planDetailRepository.findByPlan_Pno(pno);
+    List<PlanDetailDTO> planDetailDTOList = (List<PlanDetailDTO>) planDetailList.stream()
+        .map(planDetail -> entityToDto(planDetail)).collect(Collectors.toList());
+
+    return planDetailDTOList;
   }
 }

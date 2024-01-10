@@ -13,7 +13,19 @@ public interface PlanService {
     return plan;
   }
 
+  default PlanDTO entityToDTO(Plan plan) {
+    PlanDTO planDTO = PlanDTO.builder()
+        .pno(plan.getPno())
+        .title(plan.getTitle())
+        .userId(plan.getUserId())
+        .build();
+
+    return planDTO;
+  };
+
   Long savePlan(PlanDTO planDTO);
 
   Long updatePlan(PlanDTO planDTO);
+
+  PlanDTO getFromPno(Long pno);
 }
