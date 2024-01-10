@@ -1,17 +1,19 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.ScheduleDTO;
+import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Schedule;
 
 public interface ScheduleService {
 //    Long register(ScheduleDTO scheduleDTO);
 
-    //DTO -> Entity
+    //dtoToEntity
     default Schedule dtoToEntity(ScheduleDTO scheduleDTO){
         Member member = Member.builder().id(scheduleDTO.getMember()).build();
 
-        Schedule schedule= Schedule.builder().sno(scheduleDTO.getSno())
+        Schedule schedule= Schedule.builder()
+                .sno(scheduleDTO.getSno())
                 .sName(scheduleDTO.getSName())
                 .totalDay(scheduleDTO.getTotalDay())
                 .member(member)
@@ -19,7 +21,7 @@ public interface ScheduleService {
         return schedule;
     }
 
-    //Entity -> DTO
+    //entityToDTO
     default ScheduleDTO entityToDTO(Schedule schedule, Member member){
         ScheduleDTO scheduleDTO = ScheduleDTO.builder()
                 .sno(schedule.getSno())
@@ -30,6 +32,6 @@ public interface ScheduleService {
         return scheduleDTO;
     }
 
-    //스케쥴 조회
-    ScheduleDTO get(Long sno);
+    //스케줄 조회
+    ScheduleDTO getSchedule(Long sno);
 }

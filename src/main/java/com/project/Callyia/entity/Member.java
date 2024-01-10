@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 
 @Entity
@@ -26,4 +26,5 @@ public class Member {
     private String profileImage; //프로필이미지
     private String aboutMe; //자기소개글
     private LocalDate joinDate; //가입일자
+
 }

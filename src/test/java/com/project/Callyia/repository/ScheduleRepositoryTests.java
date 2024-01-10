@@ -1,5 +1,6 @@
 package com.project.Callyia.repository;
 
+import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Schedule;
 import org.junit.jupiter.api.Test;

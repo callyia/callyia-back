@@ -14,7 +14,7 @@ class ScheduleServiceTests {
     public void testGet() {
         Long sno = 20L;
 
-        ScheduleDTO scheduleDTO = scheduleService.get(sno);
+        ScheduleDTO scheduleDTO = scheduleService.getSchedule(sno);
         System.out.println(scheduleDTO);
     }
 }

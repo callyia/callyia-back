@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.ScheduleDTO;
+import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.repository.ScheduleRepository;
@@ -25,9 +26,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 //    }
 
     @Override
-    public ScheduleDTO get(Long sno) {
+    public ScheduleDTO getSchedule(Long sno) {
         Object result = scheduleRepository.getScheduleBySno(sno);
         Object[] arr = (Object[]) result;
         return entityToDTO((Schedule) arr[0], (Member) arr[1]);
     }
+
 }
