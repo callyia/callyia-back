@@ -26,12 +26,11 @@ public class DetailScheduleRepositoryTests {
             long totalDays = scheduleRepository.findById(schedule.getSno()).orElseThrow().getTotalDay();
 
             DetailSchedule detailSchedule = DetailSchedule.builder()
-                    .schedule(schedule)
+                    .sno(schedule)
                     .day((long)(Math.random()*totalDays)+1)
                     .place("장소"+i)
                     .content("일정내용" + i)
-                    .lat(35.15319914298131 + i)
-                    .lng(129.11874363377248 + i)
+                    .place_id("place_id" + i)
                     .detailImages("이미지링크" + i)
                     .build();
 

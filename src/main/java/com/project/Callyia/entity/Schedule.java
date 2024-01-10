@@ -1,7 +1,11 @@
 package com.project.Callyia.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -18,7 +22,14 @@ public class Schedule { //큰 일정
     private String sName; //큰일정이름
     private long totalDay; //총 여행 일수
 
-    @ManyToOne(fetch = FetchType.LAZY) //외래키 주인이 :N이다.
-    @JoinColumn(name = "member_id") // 외래 키 컬럼 명시
-    private Member member;
+    //외래키 주인이 :N
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member; // 일정 작성자 ID
+
+    @OneToMany(mappedBy = "sno", cascade = CascadeType.MERGE)
+    private List<DetailSchedule> detailSchedules = new ArrayList<>(); //세부일정 데이터들
+
+    public void addDetailSchedules(DetailSchedule detailSchedule) {
+        detailSchedules.add(detailSchedule);
+    }
 }
