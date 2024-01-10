@@ -33,4 +33,10 @@ public class PlanServiceImpl implements PlanService {
     }
     return updatedPno;
   }
+
+  @Override
+  public PlanDTO getFromPno(Long pno) {
+    Plan plan = planRepository.findById(pno).orElse(null);
+    return entityToDTO(plan);
+  }
 }

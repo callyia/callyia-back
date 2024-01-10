@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Log4j2
@@ -37,6 +38,28 @@ public class PlanningController {
       log.info("dto : " + dto);
     }
     return new ResponseEntity<>(tourList, HttpStatus.OK);
+  }
+
+  @GetMapping("/getDB")
+  public ResponseEntity<List<TourDTO>> getSavedDB(@RequestParam Long pno) {
+    log.info("getDB: " + pno);
+    List<PlanDetailDTO> planDetailDTOList = planDetailService.getFromPno(pno);
+    for(PlanDetailDTO dto : planDetailDTOList) {
+      log.info("getFromPno : " + dto);
+    }
+
+    List<TourDTO> tourDTOList = (List<TourDTO>) planDetailDTOList.stream()
+        .map(planDetailDTO -> tourService.planDetailToTour(planDetailDTO)).collect(Collectors.toList());
+
+    return new ResponseEntity<>(tourDTOList, HttpStatus.OK);
+  }
+
+  @GetMapping("/getTitle")
+  public ResponseEntity<String> getSavedTitle(@RequestParam Long pno) {
+    PlanDTO planDTO = planService.getFromPno(pno);
+    String title = planDTO.getTitle();
+
+    return new ResponseEntity<>(title, HttpStatus.OK);
   }
 
   @PostMapping("/save")

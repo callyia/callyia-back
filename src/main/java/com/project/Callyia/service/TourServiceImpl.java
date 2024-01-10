@@ -1,5 +1,6 @@
 package com.project.Callyia.service;
 
+import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.TourDTO;
 import com.project.Callyia.entity.Tour;
 import com.project.Callyia.repository.TourRepository;
@@ -115,6 +116,13 @@ public class TourServiceImpl implements TourService{
 //    List<Tour> tourList = tourRepository.searchTourList(keyword);
     List<Tour> tourList = tourRepository.searchTourList(keyword);
     return tourList.stream().map(tour -> entityToDTO(tour)).collect(Collectors.toList());
+  }
+
+  @Override
+  public TourDTO planDetailToTour(PlanDetailDTO planDetailDTO) {
+    Long placeId = planDetailDTO.getPlaceId();
+    Tour tour = tourRepository.findByPlaceId(placeId);
+    return entityToDTO(tour);
   }
 
   @Override

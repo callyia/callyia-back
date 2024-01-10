@@ -1,5 +1,6 @@
 package com.project.Callyia.service;
 
+import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.TourDTO;
 import com.project.Callyia.entity.Tour;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,8 @@ public interface TourService {
   Page<TourDTO> getSearchTours(String checkColumn, String keyword, Pageable pageable);
 
   List<TourDTO> getSearchTours(String keyword);
+
+  TourDTO planDetailToTour(PlanDetailDTO planDetailDTO);
 
   boolean isPlaceNameExists(String placeName);
 }
