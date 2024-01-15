@@ -10,7 +10,7 @@ public interface ScheduleService {
 
     //dtoToEntity
     default Schedule dtoToEntity(ScheduleDTO scheduleDTO){
-        Member member = Member.builder().id(scheduleDTO.getMember()).build();
+        Member member = Member.builder().email(scheduleDTO.getMember()).build();
 
         Schedule schedule= Schedule.builder()
                 .sno(scheduleDTO.getSno())
@@ -27,7 +27,7 @@ public interface ScheduleService {
                 .sno(schedule.getSno())
                 .sName(schedule.getSName())
                 .totalDay(schedule.getTotalDay())
-                .member(member.getId())
+                .member(member.getEmail())
                 .build();
         return scheduleDTO;
     }

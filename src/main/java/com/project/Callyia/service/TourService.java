@@ -1,5 +1,6 @@
 package com.project.Callyia.service;
 
+import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.TourDTO;
 import com.project.Callyia.entity.Tour;
@@ -47,6 +48,8 @@ public interface TourService {
   List<TourDTO> getSearchTours(String keyword);
 
   TourDTO planDetailToTour(PlanDetailDTO planDetailDTO);
+
+//  TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO);
 
   boolean isPlaceNameExists(String placeName);
 }

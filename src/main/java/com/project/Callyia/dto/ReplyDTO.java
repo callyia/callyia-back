@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReplyDTO {
     private Long rno;
-    private String replyerId;
     private String replyContents;
-    private DetailSchedule detailSchedule;
+    private long detailSchedule;
+    private String member;
 }

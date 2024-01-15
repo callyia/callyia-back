@@ -24,12 +24,6 @@ public class Schedule { //큰 일정
 
     //외래키 주인이 :N
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member; // 일정 작성자 ID
+    private Member member; // 일정 작성자 이메일
 
-    @OneToMany(mappedBy = "sno", cascade = CascadeType.MERGE)
-    private List<DetailSchedule> detailSchedules = new ArrayList<>(); //세부일정 데이터들
-
-    public void addDetailSchedules(DetailSchedule detailSchedule) {
-        detailSchedules.add(detailSchedule);
-    }
 }
