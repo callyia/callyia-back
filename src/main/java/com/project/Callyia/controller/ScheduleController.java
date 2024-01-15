@@ -43,7 +43,7 @@ public class ScheduleController {
         private ScheduleDTO scheduleDTO;
         private List<DetailScheduleDTO> detailScheduleDTOList;
         private List<ReplyDTO> replyDTOList;
-//        private List<TourDTO> tourDTOList;
+        private List<TourDTO> tourDTOList;
     }
 
 
@@ -60,16 +60,15 @@ public class ScheduleController {
         });
 
 
-        //TourDTO는 굳이 필요없을 수 있으나 혹시 모르니 일단 주석처리, 필요없을 시 관련 함수 TourService, TourServiceImpl에서 삭제
-//        List<TourDTO> tourDTOList = (List<TourDTO>) detailScheduleDTOList.stream()
-//                .map(detailScheduleDTO -> tourService.detailScheduleToTour(detailScheduleDTO)).collect(Collectors.toList());
+        List<TourDTO> tourDTOList = (List<TourDTO>) detailScheduleDTOList.stream()
+                .map(detailScheduleDTO -> tourService.detailScheduleToTour(detailScheduleDTO)).collect(Collectors.toList());
 
 
         postingDTO responseDTO = new postingDTO();
         responseDTO.setScheduleDTO(scheduleDTO);
         responseDTO.setDetailScheduleDTOList(detailScheduleDTOList);
         responseDTO.setReplyDTOList(replyDTOList);
-//        responseDTO.setTourDTOList(tourDTOList);
+        responseDTO.setTourDTOList(tourDTOList);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
