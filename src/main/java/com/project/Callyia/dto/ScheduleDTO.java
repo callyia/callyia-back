@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class ScheduleDTO {
     private Long sno;
     private String sName;
-    private long totalDay;
-    private String member;
+    private long total_Day;
+    private String member_email;
 }

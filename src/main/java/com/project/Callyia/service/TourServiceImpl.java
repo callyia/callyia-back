@@ -126,12 +126,12 @@ public class TourServiceImpl implements TourService{
     return entityToDTO(tour);
   }
 
-//  @Override
-//  public TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO) {
-//    Long placeId = detailScheduleDTO.getPlace_id();
-//    Tour tour = tourRepository.findByPlaceId(placeId);
-//    return entityToDTO(tour);
-//  }
+  @Override
+  public TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO) {
+    Long placeId = detailScheduleDTO.getPlace_id();
+    Tour tour = tourRepository.findByPlaceId(placeId);
+    return entityToDTO(tour);
+  }
 
   @Override
   public boolean isPlaceNameExists(String placeName) {

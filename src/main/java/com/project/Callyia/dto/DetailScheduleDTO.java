@@ -14,10 +14,8 @@ public class DetailScheduleDTO {
     private Long dno;
     private String tip;
     private String detailImages;
-    private String place_name;
     private long day;
     private long sno;
     private long place_id;
-    private double latitude;
-    private double longitude;
+    private long sequence;
 }

@@ -49,7 +49,7 @@ public interface TourService {
 
   TourDTO planDetailToTour(PlanDetailDTO planDetailDTO);
 
-//  TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO);
+  TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO);
 
   boolean isPlaceNameExists(String placeName);
 }
