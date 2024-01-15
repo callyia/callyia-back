@@ -13,4 +13,5 @@ public class PlanDTO {
   private Long pno;
   private String title;
   private String userId;
+  private Long day;
 }

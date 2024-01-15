@@ -8,6 +8,7 @@ public interface PlanService {
     Plan plan = Plan.builder()
         .title(planDTO.getTitle())
         .userId(planDTO.getUserId())
+        .day(planDTO.getDay())
         .build();
 
     return plan;
@@ -18,6 +19,7 @@ public interface PlanService {
         .pno(plan.getPno())
         .title(plan.getTitle())
         .userId(plan.getUserId())
+        .day(plan.getDay())
         .build();
 
     return planDTO;

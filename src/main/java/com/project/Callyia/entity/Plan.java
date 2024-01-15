@@ -19,4 +19,6 @@ public class Plan {
   private String title;
 
   private String userId;
+
+  private Long day;
 }

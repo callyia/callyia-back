@@ -4,6 +4,7 @@ import com.project.Callyia.dto.PlanDTO;
 import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.PlanRequestDTO;
 import com.project.Callyia.dto.TourDTO;
+import com.project.Callyia.entity.Plan;
 import com.project.Callyia.repository.PlanRepository;
 import com.project.Callyia.service.PlanDetailService;
 import com.project.Callyia.service.PlanService;
@@ -27,9 +28,6 @@ public class PlanningController {
   private final PlanDetailService planDetailService;
   private final TourService tourService;
 
-  //이따 지우고 수정할것
-  private final PlanRepository planRepository;
-
   @GetMapping("/search")
   public ResponseEntity<List<TourDTO>> searchTour(@RequestParam String keyword) {
     log.info("keyword : " + keyword);
@@ -51,15 +49,29 @@ public class PlanningController {
     List<TourDTO> tourDTOList = (List<TourDTO>) planDetailDTOList.stream()
         .map(planDetailDTO -> tourService.planDetailToTour(planDetailDTO)).collect(Collectors.toList());
 
+
     return new ResponseEntity<>(tourDTOList, HttpStatus.OK);
   }
 
-  @GetMapping("/getTitle")
-  public ResponseEntity<String> getSavedTitle(@RequestParam Long pno) {
-    PlanDTO planDTO = planService.getFromPno(pno);
-    String title = planDTO.getTitle();
+  @GetMapping("/getDay")
+  public ResponseEntity<List<Long>> getSavedDay(@RequestParam Long pno) {
+    log.info("getDB: " + pno);
+    List<PlanDetailDTO> planDetailDTOList = planDetailService.getFromPno(pno);
+    for(PlanDetailDTO dto : planDetailDTOList) {
+      log.info("getFromPno : " + dto);
+    }
 
-    return new ResponseEntity<>(title, HttpStatus.OK);
+    List<Long> dayList = (List<Long>) planDetailDTOList.stream()
+        .map(planDetailDTO -> planDetailDTO.getDay()).collect(Collectors.toList());
+
+    return new ResponseEntity<>(dayList, HttpStatus.OK);
+  }
+
+  @GetMapping("/getPlan")
+  public ResponseEntity<PlanDTO> getSavedTitle(@RequestParam Long pno) {
+    PlanDTO planDTO = planService.getFromPno(pno);
+
+    return new ResponseEntity<>(planDTO, HttpStatus.OK);
   }
 
   @PostMapping("/save")
