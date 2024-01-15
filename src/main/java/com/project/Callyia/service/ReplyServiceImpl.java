@@ -21,8 +21,8 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public Reply dtoToEntity(ReplyDTO replyDTO) {
-        DetailSchedule detailSchedule = DetailSchedule.builder().dno(replyDTO.getDetailSchedule()).build();
-        Member member = Member.builder().email(replyDTO.getMember()).build();
+        DetailSchedule detailSchedule = DetailSchedule.builder().dno(replyDTO.getDno()).build();
+        Member member = Member.builder().email(replyDTO.getReplyer()).build();
 
         Reply reply = Reply.builder()
                 .rno(replyDTO.getRno())
@@ -38,8 +38,8 @@ public class ReplyServiceImpl implements ReplyService{
         ReplyDTO replyDTO = ReplyDTO.builder()
                 .rno(reply.getRno())
                 .replyContents(reply.getReplyContents())
-                .detailSchedule(reply.getDetailSchedule().getDno())
-                .member(reply.getMember().getEmail())
+                .dno(reply.getDetailSchedule().getDno())
+                .replyer(reply.getMember().getEmail())
                 .build();
         return replyDTO;
     }

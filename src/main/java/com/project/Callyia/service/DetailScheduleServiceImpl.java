@@ -38,6 +38,7 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
         DetailScheduleDTO detailScheduleDTO = DetailScheduleDTO.builder()
                 .dno(detailSchedule.getDno())
                 .tip(detailSchedule.getTip())
+                .place_name(detailSchedule.getTour().getPlaceName())
                 .detailImages(detailSchedule.getDetailImages())
                 .day(detailSchedule.getDay())
                 .sno(detailSchedule.getSchedule().getSno())

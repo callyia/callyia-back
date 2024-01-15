@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class ReplyDTO {
     private Long rno;
     private String replyContents;
-    private long detailSchedule;
-    private String member;
+    private long dno;
+    private String replyer;
 }
