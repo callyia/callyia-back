@@ -26,6 +26,7 @@ public class PlanDetailServiceImpl implements PlanDetailService {
 
   public PlanDetail dtoToEntity(PlanDetailDTO planDetailDTO) {
     PlanDetail planDetail = PlanDetail.builder()
+        .day(planDetailDTO.getDay())
         .sequence(planDetailDTO.getSequence())
         .build();
 
@@ -53,6 +54,7 @@ public class PlanDetailServiceImpl implements PlanDetailService {
         .dno(planDetail.getDno())
         .pno(planDetail.getPlan().getPno())
         .placeId(planDetail.getTour().getPlaceId())
+        .day(planDetail.getDay())
         .sequence(planDetail.getSequence())
         .build();
 

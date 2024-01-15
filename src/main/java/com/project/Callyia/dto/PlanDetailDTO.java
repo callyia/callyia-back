@@ -13,5 +13,6 @@ public class PlanDetailDTO {
   private Long dno;
   private Long pno;
   private Long placeId;
+  private Long day;
   private Long sequence;
 }

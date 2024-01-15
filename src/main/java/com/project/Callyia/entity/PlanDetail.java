@@ -22,5 +22,7 @@ public class PlanDetail {
   @ManyToOne(fetch = FetchType.LAZY)
   private Tour tour;
 
+  private Long day;
+
   private Long sequence;
 }
