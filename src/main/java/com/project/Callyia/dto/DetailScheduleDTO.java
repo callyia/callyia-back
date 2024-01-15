@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DetailScheduleDTO {
     private Long dno;
-    private String content;
+    private String tip;
     private String detailImages;
     private long day;
     private long sno;

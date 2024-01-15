@@ -15,7 +15,7 @@ public class DetailSchedule { //세부일정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dno; //세부일정번호
 
-    private String content; //세부일정내용
+    private String tip; //세부일정내용
     private String detailImages; //세부일정사진
     private long day; //몇일차
 

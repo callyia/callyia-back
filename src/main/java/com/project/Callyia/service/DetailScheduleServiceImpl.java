@@ -37,7 +37,7 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
     public DetailScheduleDTO entityToDTO(DetailSchedule detailSchedule) {
         DetailScheduleDTO detailScheduleDTO = DetailScheduleDTO.builder()
                 .dno(detailSchedule.getDno())
-                .content(detailSchedule.getContent())
+                .content(detailSchedule.getTip())
                 .detailImages(detailSchedule.getDetailImages())
                 .day(detailSchedule.getDay())
                 .sno(detailSchedule.getSchedule().getSno())
