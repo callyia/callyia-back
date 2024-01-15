@@ -6,4 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class TourRepositoryTests {
   @Autowired
   private TourRepository tourRepository;
+
+
 }

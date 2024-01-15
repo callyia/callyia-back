@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DetailScheduleDTO {
     private Long dno;
-    private String place;
     private String content;
-    private String place_id;
     private String detailImages;
     private long day;
     private long sno;
+    private long place_id;
+    private double latitude;
+    private double longitude;
 }
