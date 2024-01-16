@@ -4,6 +4,7 @@ import com.project.Callyia.dto.ScheduleDTO;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Schedule;
+import com.project.Callyia.repository.MemberRepository;
 import com.project.Callyia.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,6 +17,8 @@ public class ScheduleServiceImpl implements ScheduleService{
     //@RequiredArgsConstructor 어노테이션이 사용되었는데,
     // 이 어노테이션은 클래스에 존재하는 모든 final 필드를 포함한 생성자를 자동으로 생성
     private final ScheduleRepository scheduleRepository;
+
+    private final MemberRepository memberRepository;
 
 //    @Override
 //    public Long register(ScheduleDTO scheduleDTO) {
@@ -30,6 +33,19 @@ public class ScheduleServiceImpl implements ScheduleService{
         Object result = scheduleRepository.getScheduleBySno(sno);
         Object[] arr = (Object[]) result;
         return entityToDTO((Schedule) arr[0], (Member) arr[1]);
+    }
+
+    @Override
+    public Long saveSchedule(ScheduleDTO scheduleDTO) {
+        Member member = memberRepository.findByEmail(scheduleDTO.getMember_email());
+
+        Schedule schedule = Schedule.builder()
+            .sName(scheduleDTO.getSName())
+            .totalDay(scheduleDTO.getTotal_Day())
+            .member(member)
+            .build();
+
+        return scheduleRepository.save(schedule).getSno();
     }
 
 }
