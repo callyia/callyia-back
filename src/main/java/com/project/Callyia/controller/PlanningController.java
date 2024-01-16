@@ -1,14 +1,9 @@
 package com.project.Callyia.controller;
 
-import com.project.Callyia.dto.PlanDTO;
-import com.project.Callyia.dto.PlanDetailDTO;
-import com.project.Callyia.dto.PlanRequestDTO;
-import com.project.Callyia.dto.TourDTO;
+import com.project.Callyia.dto.*;
 import com.project.Callyia.entity.Plan;
 import com.project.Callyia.repository.PlanRepository;
-import com.project.Callyia.service.PlanDetailService;
-import com.project.Callyia.service.PlanService;
-import com.project.Callyia.service.TourService;
+import com.project.Callyia.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -27,6 +22,8 @@ public class PlanningController {
   private final PlanService planService;
   private final PlanDetailService planDetailService;
   private final TourService tourService;
+  private final DetailScheduleService detailScheduleService;
+  private final ScheduleService scheduleService;
 
   @GetMapping("/search")
   public ResponseEntity<List<TourDTO>> searchTour(@RequestParam String keyword) {
@@ -97,5 +94,20 @@ public class PlanningController {
     return new ResponseEntity<>(savedPno, HttpStatus.OK);
   }
 
+  @PostMapping("/post")
+  public ResponseEntity<Long> postPlan(@RequestBody ScheduleRequestDTO scheduleRequestDTO) {
+    // 내일 와서 RequestBody List<DetailScheduleDTO>와 title 받아오는 구조로 고칠 것
+    DetailScheduleDTO[] detailScheduleDTOList = scheduleRequestDTO.getDetailScheduleDTOs();
+    ScheduleDTO scheduleDTO = scheduleRequestDTO.getScheduleDTO();
 
+    for (DetailScheduleDTO dto : detailScheduleDTOList) {
+      log.info(dto);
+    }
+    log.info(scheduleDTO);
+
+    Long sno = scheduleService.saveSchedule(scheduleDTO);
+    detailScheduleService.saveDetailSchedule(List.of(detailScheduleDTOList), sno);
+
+    return new ResponseEntity<>(sno, HttpStatus.OK);
+  }
 }

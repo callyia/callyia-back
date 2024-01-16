@@ -13,7 +13,6 @@ public interface ScheduleService {
         Member member = Member.builder().email(scheduleDTO.getMember_email()).build();
 
         Schedule schedule= Schedule.builder()
-                .sno(scheduleDTO.getSno())
                 .sName(scheduleDTO.getSName())
                 .totalDay(scheduleDTO.getTotal_Day())
                 .member(member)
@@ -34,4 +33,6 @@ public interface ScheduleService {
 
     //스케줄 조회
     ScheduleDTO getSchedule(Long sno);
+
+    public Long saveSchedule(ScheduleDTO scheduleDTO);
 }

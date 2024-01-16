@@ -18,20 +18,21 @@ import java.util.stream.Collectors;
 @Log4j2
 public class DetailScheduleServiceImpl implements DetailScheduleService{
     private final DetailScheduleRepository detailScheduleRepository;
-//
-//    @Override
-//    public DetailSchedule dtoToEntity(DetailScheduleDTO detailScheduleDTO) {
-//        Schedule schedule = Schedule.builder().sno(detailScheduleDTO.getSno()).build();
-//
-//        DetailSchedule detailSchedule = DetailSchedule.builder()
-//                .dno(detailScheduleDTO.getDno())
-//                .content(detailScheduleDTO.getContent())
-//                .detailImages(detailScheduleDTO.getDetailImages())
-//                .day(detailScheduleDTO.getDay())
-//                .schedule(schedule)
-//                .build();
-//        return detailSchedule;
-//    }
+
+    @Override
+    public DetailSchedule dtoToEntity(DetailScheduleDTO detailScheduleDTO) {
+        Schedule schedule = Schedule.builder().sno(detailScheduleDTO.getSno()).build();
+        Tour tour = Tour.builder().placeId(detailScheduleDTO.getPlace_id()).build();
+
+        DetailSchedule detailSchedule = DetailSchedule.builder()
+                .tip(detailScheduleDTO.getTip())
+                .detailImages(detailScheduleDTO.getDetailImages())
+                .day(detailScheduleDTO.getDay())
+                .schedule(schedule)
+                .tour(tour)
+                .build();
+        return detailSchedule;
+    }
 
     @Override
     public DetailScheduleDTO entityToDTO(DetailSchedule detailSchedule) {
@@ -58,5 +59,15 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
 
         return detailScheduleDTOList;
 
+    }
+
+    @Override
+    public void saveDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList, Long sno) {
+        for(DetailScheduleDTO dto : detailScheduleDTOList) {
+            dto.setSno(sno);
+        }
+
+        List<DetailSchedule> detailScheduleList = detailScheduleDTOList.stream().map(dto -> dtoToEntity(dto)).collect(Collectors.toList());
+        detailScheduleRepository.saveAll(detailScheduleList);
     }
 }

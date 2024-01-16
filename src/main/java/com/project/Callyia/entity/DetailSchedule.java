@@ -19,6 +19,7 @@ public class DetailSchedule { //세부일정
     private String detailImages; //세부일정사진
     private long day; //몇일차
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Schedule schedule;
 
