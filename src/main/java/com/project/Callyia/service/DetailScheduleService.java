@@ -20,4 +20,6 @@ public interface DetailScheduleService {
 
     //디테일스케줄 조회
     List<DetailScheduleDTO> getFormSno(Long sno);
+
+    void saveDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList, Long sno);
 }

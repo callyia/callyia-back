@@ -33,4 +33,6 @@ public interface ScheduleService {
 
     //스케줄 조회
     ScheduleDTO getSchedule(Long sno);
+
+    public Long saveSchedule(ScheduleDTO scheduleDTO);
 }
