@@ -17,5 +17,5 @@ public class DetailScheduleDTO {
     private long day;
     private long sno;
     private long place_id;
-    private long sequence;
+
 }
