@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,4 +23,7 @@ public class MemberDTO {
     private String profileImage; //프로필이미지
     private String aboutMe; //자기소개글
     private LocalDate joinDate; //가입일자
+
+    @Builder.Default
+    private Set<String> roleSet = new HashSet<>();
 }

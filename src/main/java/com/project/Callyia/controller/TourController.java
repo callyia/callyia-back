@@ -45,7 +45,6 @@ public class TourController {
     try {
       Pageable pageable = PageRequest.of(page - 1, size);
       Page<TourDTO> allTours = tourService.getAllTours(pageable);
-      log.info("allTours : ", allTours);
       return new ResponseEntity<>(allTours, HttpStatus.OK);
     } catch (Exception e) {
       log.error("전체 투어 조회 실패", e);
