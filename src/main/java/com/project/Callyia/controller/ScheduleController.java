@@ -6,6 +6,7 @@ import com.project.Callyia.dto.ReplyDTO;
 import com.project.Callyia.dto.ScheduleDTO;
 
 import com.project.Callyia.dto.TourDTO;
+import com.project.Callyia.entity.Reply;
 import com.project.Callyia.service.DetailScheduleService;
 import com.project.Callyia.service.ReplyService;
 import com.project.Callyia.service.ScheduleService;
@@ -74,9 +75,16 @@ public class ScheduleController {
     }
 
 
+    //댓글 새로고침
+    @GetMapping("/update")
+    public ResponseEntity<List<ReplyDTO>> updateReply(@RequestParam long dno) {
+        // dno에 해당하는 댓글 목록을 가져오는 서비스 메서드 호출
+        List<ReplyDTO> updatedReplyList = replyService.getFormDno(dno);
+        return new ResponseEntity<>(updatedReplyList, HttpStatus.OK);
+    }
 
     //댓글 등록
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<Long> registerReply(@RequestBody ReplyDTO replyDTO) {
         Long rno = replyService.register(replyDTO);
         return new ResponseEntity<>(rno, HttpStatus.OK);
@@ -84,15 +92,15 @@ public class ScheduleController {
 
 
     //댓글 수정
-    @PutMapping("modify")
+    @PutMapping("/modify")
     public ResponseEntity<Long> modifyReply(@RequestBody ReplyDTO replyDTO) {
         replyService.modify(replyDTO);
         return new ResponseEntity<>(replyDTO.getRno(), HttpStatus.OK);
     }
 
 
-    //댓글 삭제
-    @DeleteMapping("delete")
+//    //댓글 삭제
+    @DeleteMapping("delete/{rno}")
     public ResponseEntity<String> removeReply(@PathVariable("rno") Long rno) {
         replyService.remove(rno);
         return new ResponseEntity<>(rno+"", HttpStatus.OK);
