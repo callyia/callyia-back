@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
+  @Autowired
   private AuthenticationManager authenticationManager;
 
   @Autowired
@@ -27,6 +29,7 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) throws Exception {
+
     try {
 
       Authentication authentication = authenticationManager.authenticate(
@@ -34,8 +37,10 @@ public class AuthController {
 
       log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> 실행되었습니다1.");
       String token = jwtTokenProvider.generateToken(String.valueOf(authentication));
+      log.info(token);
       log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> 실행되었습니다2.");
-      return ResponseEntity.ok(token);
+      return new ResponseEntity<>(token, HttpStatus.OK);
+
     } catch(AuthenticationException authenticationException){
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
     } catch (Exception e) {

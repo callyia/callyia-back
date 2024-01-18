@@ -1,10 +1,14 @@
 package com.project.Callyia.config;
 
+import com.project.Callyia.security.service.MemberDetailsService;
+//import com.project.Callyia.service.MemberDetailService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
@@ -18,6 +22,9 @@ import org.springframework.security.web.access.expression.WebExpressionAuthoriza
 @Log4j2
 public class SecurityConfig {
 
+    @Autowired
+    private MemberDetailsService memberDetailsService;
+
     // 액세스를 허용하는 주소들을 등록
     private static final String[] AUTH_WHITELIST = {
         "/", "/sample/all", "/auth/login", "/auth/logout", "/auth/accessDenied",
@@ -28,6 +35,14 @@ public class SecurityConfig {
         // 암호화시키기 위한 빈
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+            httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(memberDetailsService);
+        return authenticationManagerBuilder.build();
     }
 
     @Bean // security 설정, 5.7.x부터 @Bean으로 등록해서 사용(리턴 타입 SecurityFilterChain)

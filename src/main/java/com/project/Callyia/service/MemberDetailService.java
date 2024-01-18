@@ -11,21 +11,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Log4j2
-@Service
-@RequiredArgsConstructor
-public class MemberDetailService implements UserDetailsService {
-  private final MemberRepository memberRepository;
-
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Member result = memberRepository.findByEmail(email);
-
-    if(result.getEmail() != null) {
-      throw new UsernameNotFoundException("Check Email");
-    }
-
-
-    return null;
-  }
-}
+//@Log4j2
+//@Service
+//@RequiredArgsConstructor
+//public class MemberDetailService implements UserDetailsService {
+//  private final MemberRepository memberRepository;
+//
+//  @Override
+//  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//    Member result = memberRepository.findByEmail(email);
+//
+//    if(result.getEmail() != null) {
+//      throw new UsernameNotFoundException("Check Email");
+//    }
+//
+//
+//    return null;
+//  }
+//}
