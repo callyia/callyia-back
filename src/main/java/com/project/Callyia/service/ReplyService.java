@@ -16,6 +16,8 @@ public interface ReplyService {
     List<ReplyDTO> getFormDno(Long dno);
 
 
+    //댓글 새로고침
+
     //댓글 등록
     long register(ReplyDTO replyDTO);
 

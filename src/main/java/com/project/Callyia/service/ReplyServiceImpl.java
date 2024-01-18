@@ -4,6 +4,7 @@ import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.ReplyDTO;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
+import com.project.Callyia.entity.Plan;
 import com.project.Callyia.entity.Reply;
 import com.project.Callyia.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,7 +65,9 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public void modify(ReplyDTO replyDTO) {
-        Reply reply = dtoToEntity(replyDTO);
+        Reply reply = replyRepository.findById(replyDTO.getRno()).orElse(null);
+
+        reply.setReplyContents(replyDTO.getReplyContents());
         replyRepository.save(reply);
     }
 
