@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/Basket")
 public class BasketController {
   private final BasketService basketService;

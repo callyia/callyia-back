@@ -30,7 +30,6 @@ import java.util.Map;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/Tour")
 public class TourController {
   private final TourService tourService;

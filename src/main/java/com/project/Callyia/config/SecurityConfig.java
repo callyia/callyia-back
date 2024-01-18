@@ -3,19 +3,15 @@ package com.project.Callyia.config;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -48,14 +44,6 @@ public class SecurityConfig {
                 .anyRequest().permitAll(); // 그외는 모두 접근 금지
         });
 
-        httpSecurity.formLogin(new Customizer<FormLoginConfigurer<HttpSecurity>>() {
-            @Override
-            public void customize(FormLoginConfigurer<HttpSecurity> httpSecurityFormLoginConfigurer) {
-                httpSecurityFormLoginConfigurer.loginPage("/auth/login");
-                httpSecurityFormLoginConfigurer.loginProcessingUrl("/login");
-//                httpSecurityFormLoginConfigurer.successHandler(customLoginSuccessHandler());
-            }
-        });
         httpSecurity.logout(new Customizer<LogoutConfigurer<HttpSecurity>>() {
             @Override
             public void customize(LogoutConfigurer<HttpSecurity> httpSecurityLogoutConfigurer) {
@@ -73,42 +61,8 @@ public class SecurityConfig {
                 httpSecurityCsrfConfigurer.disable();  //disable하면 logout을 get으로 접근해도 처리가 됨.
             }
         });
-//        httpSecurity.exceptionHandling(new Customizer<ExceptionHandlingConfigurer<HttpSecurity>>() {
-//            @Override
-//            public void customize(ExceptionHandlingConfigurer<HttpSecurity> httpSecurityExceptionHandlingConfigurer) {
-//                httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(customAccessDeniedHandler());
-//            }
-//        });
-        // addFilterBefore(filter, class)
-        //httpSecurity.addFilterBefore(new ExceptionHandlerFilter(), BasicAuthenticationFilter.class);
+
         return httpSecurity.build();
     }
-
-//    @Bean
-//    public CustomLoginSuccessHandler customLoginSuccessHandler() {
-//        return new CustomLoginSuccessHandler(passwordEncoder());
-//    }
-//
-//    @Bean
-//    public LogoutSuccessHandler customLogoutSuccessHandler() {
-//        return new CustomLogoutSuccessHandler();
-//    }
-//
-//    @Bean
-//    public AccessDeniedHandler customAccessDeniedHandler() {
-//        return new CustomAccessDeniedHandler();
-//    }
-
-//  @Bean  // 이 빈은 없어도 됨. 그러나 커스텀하게 설정할 경우 사용할 수 있다.비밀번호 암호화, 인증과 권한 부여
-//  public AuthenticationManager authenticationManager(AuthenticationConfiguration conf) throws Exception {
-//    return conf.getAuthenticationManager(); //자체적으로 AuthenticationManager생성
-//  }
-//  @Bean  // 이 빈은 없어도 됨. 그러나 커스텀하게 설정할 경우 사용할 수 있다.
-//  public AuthenticationProvider authenticationProvider() {
-//    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//    daoAuthenticationProvider.setUserDetailsService(clubUserDetailsService);
-//    daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-//    return daoAuthenticationProvider;
-//  }
 
 }
