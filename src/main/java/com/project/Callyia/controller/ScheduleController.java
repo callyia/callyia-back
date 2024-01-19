@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/Schedule")
 public class ScheduleController {
     private final ScheduleService scheduleService;

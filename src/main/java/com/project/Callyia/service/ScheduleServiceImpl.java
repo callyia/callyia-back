@@ -37,7 +37,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public Long saveSchedule(ScheduleDTO scheduleDTO) {
-        Member member = memberRepository.findByEmail(scheduleDTO.getMember_email());
+        Member member = memberRepository.findByEmail(scheduleDTO.getMember_email()).orElse(null);
 
         Schedule schedule = Schedule.builder()
             .sName(scheduleDTO.getSName())
