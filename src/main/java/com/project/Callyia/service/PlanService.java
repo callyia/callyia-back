@@ -30,4 +30,5 @@ public interface PlanService {
   Long updatePlan(PlanDTO planDTO);
 
   PlanDTO getFromPno(Long pno);
+
 }

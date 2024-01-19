@@ -2,6 +2,7 @@ package com.project.Callyia.config;
 
 import com.project.Callyia.security.service.MemberDetailsService;
 //import com.project.Callyia.service.MemberDetailService;
+import jakarta.servlet.DispatcherType;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,27 +49,37 @@ public class SecurityConfig {
     @Bean // security 설정, 5.7.x부터 @Bean으로 등록해서 사용(리턴 타입 SecurityFilterChain)
     protected SecurityFilterChain config(HttpSecurity httpSecurity) throws Exception {
         // httpSecurity의 http로 url을 요구할 때 권한을 매치하는 곳
+
+//        httpSecurity.authorizeHttpRequests(auth -> {
+//            log.info("auth>>" + auth);
+//            auth.requestMatchers(AUTH_WHITELIST).permitAll() // 시큐리티 없이 접근 가능하도록 등록
+//                .requestMatchers("/sample/admin").hasRole("ADMIN")
+//                .requestMatchers("/sample/member").access(
+//                    // 복수개의 권한을 등록할 때
+//                    new WebExpressionAuthorizationManager("hasRole('ADMIN') or hasRole('MANAGER')"))
+//                //new WebExpressionAuthorizationManager("hasAnyRole('ADMIN','MEMBER')")
+//                .anyRequest().permitAll(); // 그외는 모두 접근 금지
+//        });
+
         httpSecurity.authorizeHttpRequests(auth -> {
             log.info("auth>>" + auth);
-            auth.requestMatchers(AUTH_WHITELIST).permitAll() // 시큐리티 없이 접근 가능하도록 등록
-                .requestMatchers("/sample/admin").hasRole("ADMIN")
-                .requestMatchers("/sample/member").access(
-                    // 복수개의 권한을 등록할 때
-                    new WebExpressionAuthorizationManager("hasRole('ADMIN') or hasRole('MANAGER')"))
-                //new WebExpressionAuthorizationManager("hasAnyRole('ADMIN','MEMBER')")
-                .anyRequest().permitAll(); // 그외는 모두 접근 금지
+            auth
+                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                .requestMatchers("/access/resource-by-pno/**").authenticated()
+                .anyRequest().permitAll();
         });
 
-        httpSecurity.logout(new Customizer<LogoutConfigurer<HttpSecurity>>() {
-            @Override
-            public void customize(LogoutConfigurer<HttpSecurity> httpSecurityLogoutConfigurer) {
-                httpSecurityLogoutConfigurer
-                    .logoutUrl("/auth/logout") // csrf사용시 form의 post와 action주소와 "/auth/logout" 일치!
-                    .logoutSuccessUrl("/")
-//                    .logoutSuccessHandler(customLogoutSuccessHandler())
-                    .invalidateHttpSession(true);
-            }
-        });
+//        httpSecurity.logout(new Customizer<LogoutConfigurer<HttpSecurity>>() {
+//            @Override
+//            public void customize(LogoutConfigurer<HttpSecurity> httpSecurityLogoutConfigurer) {
+//                httpSecurityLogoutConfigurer
+//                    .logoutUrl("/auth/logout") // csrf사용시 form의 post와 action주소와 "/auth/logout" 일치!
+//                    .logoutSuccessUrl("/")
+////                    .logoutSuccessHandler(customLogoutSuccessHandler())
+//                    .invalidateHttpSession(true);
+//            }
+//        });
+
         httpSecurity.csrf(new Customizer<CsrfConfigurer<HttpSecurity>>() {
             @Override  // 서버에 인증정보를 저장하지 않기 때문에 csrf를 사용하지 않는다.
             public void customize(CsrfConfigurer<HttpSecurity> httpSecurityCsrfConfigurer) {

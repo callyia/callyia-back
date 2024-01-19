@@ -35,17 +35,12 @@ public class AuthController {
       Authentication authentication = authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
-      log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> 실행되었습니다1.");
       String token = jwtTokenProvider.generateToken(String.valueOf(authentication));
-      log.info(token);
-      log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> 실행되었습니다2.");
       return new ResponseEntity<>(token, HttpStatus.OK);
 
     } catch(AuthenticationException authenticationException){
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
     } catch (Exception e) {
-      log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> 실행이 되지 않았습니다..");
-      // 그 외 예외 처리
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
     }
   }
