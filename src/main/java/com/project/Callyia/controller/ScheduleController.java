@@ -1,11 +1,8 @@
 package com.project.Callyia.controller;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.project.Callyia.dto.DetailScheduleDTO;
-import com.project.Callyia.dto.ReplyDTO;
-import com.project.Callyia.dto.ScheduleDTO;
+import com.project.Callyia.dto.*;
 
-import com.project.Callyia.dto.TourDTO;
 import com.project.Callyia.entity.Reply;
 import com.project.Callyia.service.DetailScheduleService;
 import com.project.Callyia.service.ReplyService;
@@ -106,6 +103,13 @@ public class ScheduleController {
         return new ResponseEntity<>(rno+"", HttpStatus.OK);
     }
 
+//    //장바구니 추가
+//    @PostMapping("basket")
+//    public ResponseEntity<Long> addBasket(@RequestBody BasketDTO basketDTO) {
+//
+//    }
 
+
+    //장바구니 삭제
 
 }
