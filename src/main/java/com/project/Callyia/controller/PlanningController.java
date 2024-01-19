@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/planning")
 public class PlanningController {
   private final PlanService planService;

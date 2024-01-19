@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/member")
