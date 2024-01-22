@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,5 +48,19 @@ public class MemberController {
       log.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>", e);
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @GetMapping("/user")
+  public ResponseEntity<MemberDTO> getMember(@RequestParam String email) {
+    MemberDTO memberDTO = memberService.getMember(email);
+
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
+
+  @GetMapping("/getAll")
+  public ResponseEntity<List<MemberDTO>> getAllMember() {
+    List<MemberDTO> memberDTOList = memberService.getAllMember();
+
+    return new ResponseEntity<>(memberDTOList, HttpStatus.OK);
   }
 }
