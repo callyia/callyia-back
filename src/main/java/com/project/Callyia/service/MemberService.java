@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public interface MemberService {
@@ -54,4 +55,8 @@ public interface MemberService {
   }
 
   public boolean isEmailExists(String email);
+
+  MemberDTO getMember(String email);
+
+  List<MemberDTO> getAllMember();
 }

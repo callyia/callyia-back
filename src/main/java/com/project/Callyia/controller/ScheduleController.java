@@ -70,7 +70,12 @@ public class ScheduleController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/getSchedule")
+    public ResponseEntity<List<ScheduleDTO>> getAllSchedule() {
+        List<ScheduleDTO> scheduleDTOList = scheduleService.getAllSchedule();
 
+        return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
+    }
     //댓글 새로고침
     @GetMapping("/update")
     public ResponseEntity<List<ReplyDTO>> updateReply(@RequestParam long dno) {

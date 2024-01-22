@@ -1,7 +1,6 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.ScheduleDTO;
-import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.repository.MemberRepository;
@@ -9,6 +8,9 @@ import com.project.Callyia.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     public ScheduleDTO getSchedule(Long sno) {
         Object result = scheduleRepository.getScheduleBySno(sno);
         Object[] arr = (Object[]) result;
-        return entityToDTO((Schedule) arr[0], (Member) arr[1]);
+        return entityToDTO((Schedule) arr[0]);
     }
 
     @Override
@@ -48,4 +50,12 @@ public class ScheduleServiceImpl implements ScheduleService{
         return scheduleRepository.save(schedule).getSno();
     }
 
+    @Override
+    public List<ScheduleDTO> getAllSchedule() {
+        List<Schedule> scheduleList = scheduleRepository.findAll();
+        List<ScheduleDTO> scheduleDTOList = (List<ScheduleDTO>) scheduleList.stream()
+                .map(schedule -> entityToDTO(schedule)).collect(Collectors.toList());
+
+        return scheduleDTOList;
+    }
 }
