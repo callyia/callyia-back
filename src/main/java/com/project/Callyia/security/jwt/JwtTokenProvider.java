@@ -1,4 +1,4 @@
-package com.project.Callyia.security.util;
+package com.project.Callyia.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -37,9 +37,14 @@ public class JwtTokenProvider {
         Jwts.parser().verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8)))
             .build().parse(token));
 
+
     // 토큰 유효성 검사 후 클레임 추출
     Claims claims = (Claims) Jwts.parser().verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8)))
         .build().parse(token).getPayload();
+
+    log.info("claims.get(sub) : " + claims.get("sub"));
     return (String) claims.get("sub");
   }
+
+
 }

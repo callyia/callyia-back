@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,12 +29,14 @@ public interface MemberService {
         .profileImage(memberDTO.getProfileImage())
         .aboutMe(memberDTO.getAboutMe())
         .joinDate(memberDTO.getJoinDate())
-        .roleSet(memberDTO.getRoleSet().stream().map(
-            str -> {
-              if (str.equals("ROLE_USER")) return MemberRole.USER;
-              else if (str.equals("ROLE_ADMIN")) return MemberRole.ADMIN;
-              else return MemberRole.USER;
-            }).collect(Collectors.toSet()))
+        .roleSet(memberDTO.getRoleSet().isEmpty() ?
+            Collections.singleton(MemberRole.USER) :
+            memberDTO.getRoleSet().stream().map(
+                str -> {
+                  if (str.equals("ROLE_USER")) return MemberRole.USER;
+                  else if (str.equals("ROLE_ADMIN")) return MemberRole.ADMIN;
+                  else return MemberRole.USER;
+                }).collect(Collectors.toSet()))
         .build();
     return member;
   }

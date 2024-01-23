@@ -28,11 +28,8 @@ public class Member {
     private String aboutMe; //자기소개글
     private LocalDate joinDate; //가입일자
 
+    // @ElementCollection은 roleSet을 다른 테이블에 저장하기 위함
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();
-
-    public void addMemberRole(MemberRole memberRole) {
-        roleSet.add(memberRole);
-    }
 }
