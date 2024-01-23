@@ -13,8 +13,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
             " WHERE s.sno = :sno")
     Object getScheduleBySno(@Param("sno") Long sno);
 
-    @Query("SELECT s, m.nickname " +
-            "FROM Schedule s " +
-            "JOIN s.member m")
-    List<Object[]> getNickname();
+
 }
