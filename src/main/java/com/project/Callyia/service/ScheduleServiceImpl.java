@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,9 +53,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public List<ScheduleDTO> getAllSchedule() {
-        List<Schedule> scheduleList = scheduleRepository.findAll();
-        List<ScheduleDTO> scheduleDTOList = (List<ScheduleDTO>) scheduleList.stream()
-                .map(schedule -> entityToDTO(schedule)).collect(Collectors.toList());
+        List<Object[]> results = scheduleRepository.getNickname();
+        List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
+
+        for (Object[] result : results) {
+            Schedule schedule = (Schedule) result[0];
+            Member member = (Member) result[1];
+            ScheduleDTO scheduleDTO = entityToDTO(schedule);
+            scheduleDTOList.add(scheduleDTO);
+        }
 
         return scheduleDTOList;
     }

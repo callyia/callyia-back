@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.Callyia.dto.*;
 
 import com.project.Callyia.entity.Reply;
-import com.project.Callyia.service.DetailScheduleService;
-import com.project.Callyia.service.ReplyService;
-import com.project.Callyia.service.ScheduleService;
-import com.project.Callyia.service.TourService;
+import com.project.Callyia.service.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -32,6 +29,7 @@ public class ScheduleController {
     private final DetailScheduleService detailScheduleService;
     private final TourService tourService;
     private final ReplyService replyService;
+    private final MemberService memberService;
 
     @Setter
     @Getter
@@ -41,14 +39,17 @@ public class ScheduleController {
         private List<DetailScheduleDTO> detailScheduleDTOList;
         private List<ReplyDTO> replyDTOList;
         private List<TourDTO> tourDTOList;
+        private MemberDTO memberDTO;
+        private List<MemberDTO> memberDTOList;
     }
-
 
     @GetMapping(value = "/posting", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<postingDTO> posting(@RequestParam long sno){
         ScheduleDTO scheduleDTO = scheduleService.getSchedule(sno);
+        MemberDTO memberDTO = memberService.getMember(scheduleDTO.getMember_email());
         List<DetailScheduleDTO> detailScheduleDTOList = detailScheduleService.getFormSno(sno);
         List<ReplyDTO> replyDTOList = new ArrayList<>();
+        List<MemberDTO> memberDTOList = memberService.getAllMember();
 
         detailScheduleDTOList.forEach(detailScheduleDTO -> {
             long dno = detailScheduleDTO.getDno();
@@ -66,6 +67,8 @@ public class ScheduleController {
         responseDTO.setDetailScheduleDTOList(detailScheduleDTOList);
         responseDTO.setReplyDTOList(replyDTOList);
         responseDTO.setTourDTOList(tourDTOList);
+        responseDTO.setMemberDTO(memberDTO);
+        responseDTO.setMemberDTOList(memberDTOList);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
