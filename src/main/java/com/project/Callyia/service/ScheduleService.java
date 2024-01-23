@@ -30,6 +30,7 @@ public interface ScheduleService {
                 .sName(schedule.getSName())
                 .total_Day(schedule.getTotalDay())
                 .member_email(schedule.getMember().getEmail())
+                .member_nickname(schedule.getMember().getNickname())
                 .build();
         return scheduleDTO;
     }

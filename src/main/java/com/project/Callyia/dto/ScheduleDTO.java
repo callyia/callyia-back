@@ -17,4 +17,5 @@ public class ScheduleDTO {
     private String sName;
     private long total_Day;
     private String member_email;
+    private String member_nickname;
 }

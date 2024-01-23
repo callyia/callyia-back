@@ -42,6 +42,7 @@ public class ReplyServiceImpl implements ReplyService{
                 .replyContents(reply.getReplyContents())
                 .dno(reply.getDetailSchedule().getDno())
                 .replyer(reply.getMember().getEmail())
+                .replyer_nickname(reply.getMember().getNickname())
                 .build();
         return replyDTO;
     }
