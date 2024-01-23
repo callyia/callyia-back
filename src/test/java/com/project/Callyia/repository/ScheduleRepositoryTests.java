@@ -18,9 +18,16 @@ class ScheduleRepositoryTests {
     @Autowired
     private ScheduleService scheduleService;
 
-    List<ScheduleDTO> result = scheduleService.getAllSchedule();
-    @Test
-    void getNickname() {
-        log.info(result);
-    }
+
+//    List<ScheduleDTO> result = scheduleService.getAllSchedule();
+//    @Test
+//    void getNickname() {
+//        log.info(result);
+//    }
+
+
+//    @Test
+//    void test() {
+//        scheduleService.getSchedulesByEmailWithImage("test@t.t");
+//    }
 }

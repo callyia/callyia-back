@@ -1,9 +1,12 @@
 package com.project.Callyia.controller;
 
 import com.project.Callyia.dto.MemberDTO;
+import com.project.Callyia.dto.MemberRequestDTO;
+import com.project.Callyia.dto.ScheduleDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.repository.MemberRepository;
 import com.project.Callyia.service.MemberService;
+import com.project.Callyia.service.ScheduleService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +26,7 @@ import java.util.Map;
 public class MemberController {
   private final MemberRepository memberRepository;
   private final MemberService memberService;
+  private final ScheduleService scheduleService;
 
   @PostMapping("/auth")
   public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
@@ -62,5 +66,17 @@ public class MemberController {
     List<MemberDTO> memberDTOList = memberService.getAllMember();
 
     return new ResponseEntity<>(memberDTOList, HttpStatus.OK);
+  }
+
+  @GetMapping("getMember")
+  public ResponseEntity<MemberRequestDTO> getMemberProfile(@RequestParam String email) {
+    log.info("email: " + email);
+
+    MemberDTO memberDTO = memberService.getMember(email);
+    memberDTO.setPassword(null);
+    List<ScheduleDTO> scheduleDTOs = scheduleService.getSchedulesByEmail(email);
+    MemberRequestDTO memberRequestDTO = new MemberRequestDTO(memberDTO, scheduleDTOs);
+
+    return new ResponseEntity<>(memberRequestDTO, HttpStatus.OK);
   }
 }

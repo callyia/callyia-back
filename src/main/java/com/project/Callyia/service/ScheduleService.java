@@ -41,4 +41,8 @@ public interface ScheduleService {
     public Long saveSchedule(ScheduleDTO scheduleDTO);
 
     List<ScheduleDTO> getAllSchedule();
+
+    List<ScheduleDTO> getSchedulesByEmail(String email);
+
+//  List<Object> getSchedulesByEmailWithImage(String email);
 }
