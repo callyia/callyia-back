@@ -15,5 +15,6 @@ public class ReplyDTO {
     private Long rno;
     private String replyContents;
     private long dno;
-    private String replyer;
+    private String replyer; //댓글 단 유저 이메일
+    private String replyer_nickname; //댓글 단 유저 닉네임
 }

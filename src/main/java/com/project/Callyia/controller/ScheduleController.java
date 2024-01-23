@@ -43,6 +43,14 @@ public class ScheduleController {
         private List<MemberDTO> memberDTOList;
     }
 
+    @Setter
+    @Getter
+    @JsonSerialize
+    public class scheduleNicknameDTO {
+        private List<ScheduleDTO> scheduleDTOList;
+        private List<MemberDTO> memberDTOList;
+    }
+
     @GetMapping(value = "/posting", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<postingDTO> posting(@RequestParam long sno){
         ScheduleDTO scheduleDTO = scheduleService.getSchedule(sno);
