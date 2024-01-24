@@ -69,14 +69,5 @@ public class ScheduleServiceImpl implements ScheduleService{
         return scheduleDTOs;
     }
 
-//    @Override
-//    public List<Object> getSchedulesByEmailWithImage(String email) {
-//       List<Schedule> schedules = scheduleRepository.getScheduleWithImage(email);
-//
-//       for(Object sch : schedules) {
-//           log.info(sch);
-//       }
-//
-//       return null;
-//    }
+
 }

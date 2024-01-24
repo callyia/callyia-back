@@ -22,4 +22,7 @@ public interface DetailScheduleService {
     List<DetailScheduleDTO> getFormSno(Long sno);
 
     void saveDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList, Long sno);
+
+
+    DetailScheduleDTO findDetailScheduleFirst(Long sno);
 }

@@ -1,10 +1,10 @@
 package com.project.Callyia.controller;
 
-import com.project.Callyia.dto.MemberDTO;
-import com.project.Callyia.dto.MemberRequestDTO;
-import com.project.Callyia.dto.ScheduleDTO;
+import com.project.Callyia.dto.*;
+import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.repository.MemberRepository;
+import com.project.Callyia.service.DetailScheduleService;
 import com.project.Callyia.service.MemberService;
 import com.project.Callyia.service.ScheduleService;
 import lombok.Data;
@@ -15,9 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @Log4j2
@@ -27,6 +29,7 @@ public class MemberController {
   private final MemberRepository memberRepository;
   private final MemberService memberService;
   private final ScheduleService scheduleService;
+  private final DetailScheduleService detailScheduleService;
 
   @PostMapping("/auth")
   public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
@@ -75,7 +78,28 @@ public class MemberController {
     MemberDTO memberDTO = memberService.getMember(email);
     memberDTO.setPassword(null);
     List<ScheduleDTO> scheduleDTOs = scheduleService.getSchedulesByEmail(email);
-    MemberRequestDTO memberRequestDTO = new MemberRequestDTO(memberDTO, scheduleDTOs);
+    List<Long> snoList = scheduleDTOs.stream().map(scheduleDTO -> scheduleDTO.getSno()).collect(Collectors.toList());
+    log.info(snoList);
+
+    List<String> imageList = snoList.stream().map(sno ->
+      detailScheduleService.findDetailScheduleFirst(sno).getDetailImages()
+    ).collect(Collectors.toList());
+
+
+    List<ScheduleThumbnailRequestDTO> scheduleThumbnailRequestDTOs = new ArrayList<>();
+    for(int i=0;i<scheduleDTOs.size();i++) {
+      scheduleThumbnailRequestDTOs.add(new ScheduleThumbnailRequestDTO(scheduleDTOs.get(i), imageList.get(i)));
+    }
+
+    for(ScheduleThumbnailRequestDTO s : scheduleThumbnailRequestDTOs) {
+      log.info(s.getScheduleDTO());
+      log.info(s.getImage());
+    }
+
+
+    MemberRequestDTO memberRequestDTO = new MemberRequestDTO(memberDTO, scheduleThumbnailRequestDTOs);
+
+
 
     return new ResponseEntity<>(memberRequestDTO, HttpStatus.OK);
   }
