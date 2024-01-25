@@ -71,7 +71,7 @@ public class MemberController {
     return new ResponseEntity<>(memberDTOList, HttpStatus.OK);
   }
 
-  @GetMapping("getMember")
+  @GetMapping("/getMember")
   public ResponseEntity<MemberRequestDTO> getMemberProfile(@RequestParam String email) {
     log.info("email: " + email);
 
