@@ -19,9 +19,14 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
             "JOIN s.member m")
     List<Object[]> getNickname();
 
+//    @Query("SELECT s, d.detailImages FROM Schedule s INNER JOIN DetailSchedule d ON s.sno = d.schedule.sno where s.member.email = :email group by s.sno")
+//    List<Object> getSch(@Param("email") String email);
+
     List<Schedule> findByMember_email(String email);
 
-//    @Query("SELECT s.sno, s.total_day, s.member_email, s.s_name, d.detail_images FROM schedule s INNER JOIN detail_schedule d ON s.sno = d.schedule_sno WHERE s.member_email=':email' GROUP BY s.sno")
+//    @Query("SELECT s, d.detailImages FROM schedule s INNER JOIN detailSchedule d ON s.sno = d.schedule.sno WHERE s.member.email=':email' GROUP BY s.sno")
 //    List<Schedule> getScheduleWithImage(String email);
+
+
 
 }

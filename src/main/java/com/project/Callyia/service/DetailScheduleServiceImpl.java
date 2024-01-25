@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,4 +69,11 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
         List<DetailSchedule> detailScheduleList = detailScheduleDTOList.stream().map(dto -> dtoToEntity(dto)).collect(Collectors.toList());
         detailScheduleRepository.saveAll(detailScheduleList);
     }
+
+    @Override
+    public DetailScheduleDTO findDetailScheduleFirst(Long sno) {
+        DetailSchedule detailSchedule = detailScheduleRepository.findFirstBySchedule_sno(sno);
+        return entityToDTO(detailSchedule);
+    }
+
 }

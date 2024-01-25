@@ -44,5 +44,5 @@ public interface ScheduleService {
 
     List<ScheduleDTO> getSchedulesByEmail(String email);
 
-//  List<Object> getSchedulesByEmailWithImage(String email);
+
 }
