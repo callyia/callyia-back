@@ -61,6 +61,15 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
     }
 
     @Override
+    public List<DetailScheduleDTO> getAllDetailSchedule() {
+        List<DetailSchedule> detailScheduleList = detailScheduleRepository.findAll();
+        List<DetailScheduleDTO> detailScheduleDTOList = (List<DetailScheduleDTO>) detailScheduleList.stream()
+                .map(detailSchedule -> entityToDTO(detailSchedule)).collect(Collectors.toList());
+
+        return detailScheduleDTOList;
+    }
+
+    @Override
     public void saveDetailSchedule(List<DetailScheduleDTO> detailScheduleDTOList, Long sno) {
         for(DetailScheduleDTO dto : detailScheduleDTOList) {
             dto.setSno(sno);

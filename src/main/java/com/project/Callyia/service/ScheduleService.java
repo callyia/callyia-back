@@ -31,6 +31,9 @@ public interface ScheduleService {
                 .total_Day(schedule.getTotalDay())
                 .member_email(schedule.getMember().getEmail())
                 .member_nickname(schedule.getMember().getNickname())
+                .member_profile_image(schedule.getMember().getProfileImage())
+                .regDate(schedule.getRegDate())
+                .modDate(schedule.getModDate())
                 .build();
         return scheduleDTO;
     }

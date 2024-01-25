@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,4 +19,7 @@ public class ReplyDTO {
     private long dno;
     private String replyer; //댓글 단 유저 이메일
     private String replyer_nickname; //댓글 단 유저 닉네임
+
+    private LocalDateTime regDate;
+    private LocalDateTime modDate;
 }
