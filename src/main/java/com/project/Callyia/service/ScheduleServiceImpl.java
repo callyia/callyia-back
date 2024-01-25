@@ -61,8 +61,17 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
+    public List<ScheduleDTO> getMemberSchedule(String email) {
+        List<Schedule> memberScheduleList = scheduleRepository.findAllByMember_email(email);
+        List<ScheduleDTO> memberScheduleDTOList = (List<ScheduleDTO>) memberScheduleList.stream()
+                .map(schedule -> entityToDTO(schedule)).collect(Collectors.toList());
+
+        return memberScheduleDTOList;
+    }
+
+    @Override
     public List<ScheduleDTO> getSchedulesByEmail(String email) {
-        List<Schedule> schedules = scheduleRepository.findByMember_email(email);
+        List<Schedule> schedules = scheduleRepository.findAllByMember_email(email);
 
         List<ScheduleDTO> scheduleDTOs = schedules.stream().map(schedule -> entityToDTO(schedule)).collect(Collectors.toList());
 

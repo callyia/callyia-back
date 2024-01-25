@@ -42,6 +42,8 @@ public interface ScheduleService {
 
     List<ScheduleDTO> getAllSchedule();
 
+    List<ScheduleDTO> getMemberSchedule(String email);
+
     List<ScheduleDTO> getSchedulesByEmail(String email);
 
 //  List<Object> getSchedulesByEmailWithImage(String email);

@@ -81,13 +81,21 @@ public class ScheduleController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/getSchedule")
+    @GetMapping("/getAllSchedule")
     public ResponseEntity<List<ScheduleDTO>> getAllSchedule() {
         List<ScheduleDTO> scheduleDTOList = scheduleService.getAllSchedule();
 
         return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
     }
-    //댓글 새로고침
+
+    @GetMapping("/getMemberSchedule")
+    public ResponseEntity<List<ScheduleDTO>> getMemberSchedule(String email) {
+        List<ScheduleDTO> scheduleDTOList = scheduleService.getMemberSchedule(email);
+
+        return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
+    }
+
+        //댓글 새로고침
     @GetMapping("/update")
     public ResponseEntity<List<ReplyDTO>> updateReply(@RequestParam long dno) {
         // dno에 해당하는 댓글 목록을 가져오는 서비스 메서드 호출
