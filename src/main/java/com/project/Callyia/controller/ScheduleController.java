@@ -95,6 +95,13 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/getDetailSchedule")
+    public ResponseEntity<List<DetailScheduleDTO>> getAllDetailSchedule() {
+        List<DetailScheduleDTO> detailScheduleDTOList = detailScheduleService.getAllDetailSchedule();
+
+        return new ResponseEntity<>(detailScheduleDTOList, HttpStatus.OK);
+    }
+
     //댓글 새로고침
     @GetMapping("/update")
     public ResponseEntity<List<ReplyDTO>> updateReply(@RequestParam long dno) {

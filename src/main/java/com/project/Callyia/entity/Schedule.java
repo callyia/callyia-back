@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @ToString
-public class Schedule { //큰 일정
+public class Schedule extends DateEntity { //큰 일정
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sno; //큰일정번호

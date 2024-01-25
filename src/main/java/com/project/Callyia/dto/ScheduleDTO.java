@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,4 +20,8 @@ public class ScheduleDTO {
     private long total_Day;
     private String member_email;
     private String member_nickname;
+    private String member_profile_image;
+
+    private LocalDateTime regDate;
+    private LocalDateTime modDate;
 }

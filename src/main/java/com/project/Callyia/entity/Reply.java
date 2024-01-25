@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Reply { //세부일정댓글
+public class Reply extends DateEntity{ //세부일정댓글
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno; //댓글번호
