@@ -6,6 +6,7 @@ import com.project.Callyia.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Log4j2
@@ -28,6 +29,7 @@ public class PlanServiceImpl implements PlanService {
     Long updatedPno = null;
     if(plan != null) {
       plan.setTitle(planDTO.getTitle());
+      plan.setModDate();
       Plan uplan = planRepository.save(plan);
       updatedPno = uplan.getPno();
     }

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,4 +16,7 @@ public class PlanDTO {
   private String title;
   private String userId;
   private Long day;
+
+  LocalDateTime regDate;
+  LocalDateTime modDate;
 }

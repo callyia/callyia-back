@@ -11,14 +11,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Plan {
+public class Plan extends DateEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long pno;
 
   private String title;
 
-  private String userId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Member member;
 
   private Long day;
 }

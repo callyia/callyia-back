@@ -51,7 +51,7 @@ public class PlanningController {
 
   @GetMapping("/getDay")
   public ResponseEntity<List<Long>> getSavedDay(@RequestParam Long pno) {
-    log.info("getDB: " + pno);
+    log.info("getDay: " + pno);
     List<PlanDetailDTO> planDetailDTOList = planDetailService.getFromPno(pno);
     for(PlanDetailDTO dto : planDetailDTOList) {
       log.info("getFromPno : " + dto);
@@ -65,6 +65,7 @@ public class PlanningController {
 
   @GetMapping("/getPlan")
   public ResponseEntity<PlanDTO> getSavedTitle(@RequestParam Long pno) {
+    log.info("GET PLAN 접근");
     PlanDTO planDTO = planService.getFromPno(pno);
 
     return new ResponseEntity<>(planDTO, HttpStatus.OK);
@@ -72,6 +73,7 @@ public class PlanningController {
 
   @PostMapping("/save")
   public ResponseEntity<Long> savePlan(@RequestBody PlanRequestDTO planRequestDTO) {
+    log.info("SAVE 접근");
     PlanDetailDTO[] planDetailDTOs = planRequestDTO.getPlanDetailDTOs();
     PlanDTO planDTO = planRequestDTO.getPlanDTO();
 
