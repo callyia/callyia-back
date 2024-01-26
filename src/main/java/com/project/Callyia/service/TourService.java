@@ -1,5 +1,6 @@
 package com.project.Callyia.service;
 
+import com.project.Callyia.dto.BasketDTO;
 import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.TourDTO;
@@ -48,6 +49,8 @@ public interface TourService {
   List<TourDTO> getSearchTours(String keyword);
 
   TourDTO planDetailToTour(PlanDetailDTO planDetailDTO);
+
+  TourDTO basketToTour(BasketDTO basketDTO);
 
   TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO);
 

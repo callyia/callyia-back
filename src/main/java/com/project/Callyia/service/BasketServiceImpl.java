@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -22,8 +25,15 @@ public class BasketServiceImpl implements BasketService {
     return basket.getBno();
   }
 
+//  @Override
+//  public boolean isPlaceIdExists(Tour placeId) {
+//    return basketRepository.existsByPlaceId(placeId);
+//  }
+
   @Override
-  public boolean isPlaceIdExists(Tour placeId) {
-    return basketRepository.existsByPlaceId(placeId);
+  public List<BasketDTO> getFromEmail(String email) {
+    List<BasketDTO> baskets = basketRepository.findByMember_email(email).stream().map(basket -> entityToDTO(basket)).collect(Collectors.toList());
+
+    return baskets;
   }
 }
