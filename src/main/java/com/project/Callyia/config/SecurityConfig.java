@@ -30,19 +30,7 @@ public class SecurityConfig {
 
     // 액세스를 허용하는 주소들을 등록
     private static final String[] AUTH_WHITELIST = {
-        "/", "/auth/login", "/member/auth", "/member/upload", "/Tour/all", "/Tour/search", "/planning/search","/basket",
-        "/Tour",
-        "/Tour/upload",
-        "/planning/getDB",
-        "/planning/getDay",
-        "/planning/getPlan",
-        "/planning/save",
-        "/planning/update",
-        "/planning/post",
-        "/Schedule/posting",
-        "/Schedule/register",
-        "/Schedule/modify",
-        "/Schedule/delete",
+        "/", "/auth/login", "/member/auth", "/member/upload", "/Tour/all", "/Tour/search", "/planning/search",
     };
 
     private static final String[] USER_AUTH_WHITELIST = {
