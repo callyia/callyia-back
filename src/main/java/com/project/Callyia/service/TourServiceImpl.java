@@ -1,5 +1,6 @@
 package com.project.Callyia.service;
 
+import com.project.Callyia.dto.BasketDTO;
 import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.PlanDetailDTO;
 import com.project.Callyia.dto.TourDTO;
@@ -11,7 +12,6 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -122,6 +122,13 @@ public class TourServiceImpl implements TourService{
   @Override
   public TourDTO planDetailToTour(PlanDetailDTO planDetailDTO) {
     Long placeId = planDetailDTO.getPlaceId();
+    Tour tour = tourRepository.findByPlaceId(placeId);
+    return entityToDTO(tour);
+  }
+
+  @Override
+  public TourDTO basketToTour(BasketDTO basketDTO) {
+    Long placeId = basketDTO.getPlaceId();
     Tour tour = tourRepository.findByPlaceId(placeId);
     return entityToDTO(tour);
   }

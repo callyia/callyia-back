@@ -15,14 +15,11 @@ public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bno")
     private Long bno;
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Tour placeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Tour tour;
 
-//  @ManyToOne
-//  @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-//  private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 }
