@@ -6,7 +6,9 @@ import com.project.Callyia.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -40,5 +42,13 @@ public class PlanServiceImpl implements PlanService {
   public PlanDTO getFromPno(Long pno) {
     Plan plan = planRepository.findById(pno).orElse(null);
     return entityToDTO(plan);
+  }
+
+  @Override
+  public List<PlanDTO> getFromEmail(String email) {
+    List<Plan> plans = planRepository.findByMember_Email(email);
+    List<PlanDTO> planDTOs = plans.stream().map(plan -> entityToDTO(plan)).collect(Collectors.toList());
+
+    return planDTOs;
   }
 }

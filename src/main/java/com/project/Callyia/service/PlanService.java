@@ -4,6 +4,8 @@ import com.project.Callyia.dto.PlanDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Plan;
 
+import java.util.List;
+
 public interface PlanService {
   default Plan dtoToEntity(PlanDTO planDTO) {
     Member member = Member.builder().email(planDTO.getUserId()).build();
@@ -36,4 +38,5 @@ public interface PlanService {
 
   PlanDTO getFromPno(Long pno);
 
+  List<PlanDTO> getFromEmail(String email);
 }

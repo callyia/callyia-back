@@ -6,6 +6,7 @@ import com.project.Callyia.entity.Member;
 import com.project.Callyia.repository.MemberRepository;
 import com.project.Callyia.service.DetailScheduleService;
 import com.project.Callyia.service.MemberService;
+import com.project.Callyia.service.PlanService;
 import com.project.Callyia.service.ScheduleService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class MemberController {
   private final MemberService memberService;
   private final ScheduleService scheduleService;
   private final DetailScheduleService detailScheduleService;
+  private final PlanService planService;
 
   @PostMapping("/auth")
   public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
@@ -102,5 +104,12 @@ public class MemberController {
 
 
     return new ResponseEntity<>(memberRequestDTO, HttpStatus.OK);
+  }
+
+  @GetMapping("/getMemberPlan")
+  public ResponseEntity<List<PlanDTO>> getMemberPlanList(@RequestParam String email) {
+    List<PlanDTO> planDTOs = planService.getFromEmail(email);
+
+    return new ResponseEntity<>(planDTOs, HttpStatus.OK);
   }
 }
