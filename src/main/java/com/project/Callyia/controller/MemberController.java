@@ -112,4 +112,11 @@ public class MemberController {
 
     return new ResponseEntity<>(planDTOs, HttpStatus.OK);
   }
+
+  @PutMapping("/updateMember")
+  public ResponseEntity<MemberDTO> PutMemberPage(@RequestBody MemberDTO memberDTO) {
+    MemberDTO updateMemberDTO = memberService.updateMember(memberDTO);
+
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
 }
