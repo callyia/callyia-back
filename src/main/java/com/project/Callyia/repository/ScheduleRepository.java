@@ -27,6 +27,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 //    @Query("SELECT s, d.detailImages FROM schedule s INNER JOIN detailSchedule d ON s.sno = d.schedule.sno WHERE s.member.email=':email' GROUP BY s.sno")
 //    List<Schedule> getScheduleWithImage(String email);
 
-
+    List<Schedule> findTop6ByOrderByRegDateDesc();
 
 }

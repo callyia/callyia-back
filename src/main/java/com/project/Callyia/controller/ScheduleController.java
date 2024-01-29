@@ -88,6 +88,13 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/getRecentSchedule")
+    public ResponseEntity<List<ScheduleDTO>> getRecentSchedule() {
+        List<ScheduleDTO> scheduleDTOList = scheduleService.getRecentSchedule();
+
+        return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
+    }
+
     @GetMapping("/getMemberSchedule")
     public ResponseEntity<List<ScheduleDTO>> getMemberSchedule(String email) {
         List<ScheduleDTO> scheduleDTOList = scheduleService.getMemberSchedule(email);
