@@ -37,6 +37,31 @@ public class MemberServiceImpl implements MemberService{
   }
 
   @Override
+  public MemberDTO updateMember(MemberDTO memberDTO) {
+    Member member = memberRepository.findById(memberDTO.getEmail())
+            .orElseThrow(() -> new RuntimeException("멤버 없음"));
+
+    member.setProfileImage(memberDTO.getProfileImage());
+    member.setAboutMe(memberDTO.getAboutMe());
+    member = memberRepository.save(member);
+    return toMemberDTO(member);
+  }
+
+  private MemberDTO toMemberDTO(Member member) {
+    return MemberDTO.builder()
+            .email(member.getEmail())
+            .password(member.getPassword())
+            .gender(member.getGender())
+            .name(member.getName())
+            .nickname(member.getNickname())
+            .phone(member.getPhone())
+            .profileImage(member.getProfileImage())
+            .aboutMe(member.getAboutMe())
+            .joinDate(member.getJoinDate())
+            .build();
+  }
+
+  @Override
   public List<MemberDTO> getAllMember() {
     List<Member> memberList = memberRepository.findAll();
     List<MemberDTO> memberDTOList = (List<MemberDTO>) memberList.stream()

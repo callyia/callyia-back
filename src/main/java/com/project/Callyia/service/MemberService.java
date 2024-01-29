@@ -61,5 +61,6 @@ public interface MemberService {
 
   MemberDTO getMember(String email);
 
+  MemberDTO updateMember(MemberDTO memberDTO);
   List<MemberDTO> getAllMember();
 }
