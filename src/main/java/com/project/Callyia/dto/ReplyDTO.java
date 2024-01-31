@@ -19,7 +19,7 @@ public class ReplyDTO {
     private long dno;
     private String replyer; //댓글 단 유저 이메일
     private String replyer_nickname; //댓글 단 유저 닉네임
-
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
+    private String replyer_img;
+    private LocalDateTime reply_regDate;
+    private LocalDateTime reply_modDate;
 }
