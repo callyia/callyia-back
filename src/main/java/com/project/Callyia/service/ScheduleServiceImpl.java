@@ -86,5 +86,10 @@ public class ScheduleServiceImpl implements ScheduleService{
         return scheduleDTOs;
     }
 
+    @Override
+    public int getScheduleCountByEmail(String email) {
+        return scheduleRepository.findByMember_Email(email).size();
+    }
+
 
 }

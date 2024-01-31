@@ -1,5 +1,6 @@
 package com.project.Callyia.repository;
 
+import com.project.Callyia.entity.Plan;
 import com.project.Callyia.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +24,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 //    List<Object> getSch(@Param("email") String email);
 
     List<Schedule> findAllByMember_email(String email);
+
+    List<Schedule> findByMember_Email(String email);
 
 //    @Query("SELECT s, d.detailImages FROM schedule s INNER JOIN detailSchedule d ON s.sno = d.schedule.sno WHERE s.member.email=':email' GROUP BY s.sno")
 //    List<Schedule> getScheduleWithImage(String email);

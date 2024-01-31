@@ -88,6 +88,12 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/getScheduleCount")
+    public ResponseEntity<Integer> getScheduleCount(@RequestParam String email) {
+        int postCount = scheduleService.getScheduleCountByEmail(email);
+        return new ResponseEntity<>(postCount, HttpStatus.OK);
+    }
+
     @GetMapping("/getRecentSchedule")
     public ResponseEntity<List<ScheduleDTO>> getRecentSchedule() {
         List<ScheduleDTO> scheduleDTOList = scheduleService.getRecentSchedule();
