@@ -45,11 +45,11 @@ public interface ScheduleService {
 
     List<ScheduleDTO> getAllSchedule();
 
-  List<ScheduleDTO> getRecentSchedule();
+    List<ScheduleDTO> getRecentSchedule();
 
-  List<ScheduleDTO> getMemberSchedule(String email);
+    List<ScheduleDTO> getMemberSchedule(String email);
 
     List<ScheduleDTO> getSchedulesByEmail(String email);
 
-
+    int getScheduleCountByEmail(String email);
 }
