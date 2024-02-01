@@ -55,4 +55,6 @@ public interface TourService {
   TourDTO detailScheduleToTour(DetailScheduleDTO detailScheduleDTO);
 
   boolean isPlaceNameExists(String placeName);
+
+  boolean isAddressExists(String address);
 }
