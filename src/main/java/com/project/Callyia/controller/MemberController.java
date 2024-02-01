@@ -119,4 +119,10 @@ public class MemberController {
 
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
   }
+
+  @DeleteMapping("/deleteMember")
+  public ResponseEntity<MemberDTO> deleteMember(@RequestParam String email) {
+    memberService.deleteMember(email);
+    return ResponseEntity.ok().build();
+  }
 }
