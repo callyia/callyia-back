@@ -43,6 +43,7 @@ public class SecurityConfig {
         "/Schedule/register",
         "/Schedule/modify",
         "/Schedule/delete",
+        "/s3/profile/**",
     };
 
     private static final String[] USER_AUTH_WHITELIST = {
