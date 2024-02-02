@@ -125,4 +125,11 @@ public class MemberController {
     memberService.deleteMember(email);
     return ResponseEntity.ok().build();
   }
+
+  @GetMapping("/getUser")
+  public ResponseEntity<MemberDTO> getUser(@RequestParam String email) {
+    MemberDTO memberDTO = memberService.getMember(email);
+
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
 }
