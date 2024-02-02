@@ -150,4 +150,8 @@ public class TourServiceImpl implements TourService{
     return tourRepository.existsByAddress(address);
   }
 
+  @Override
+  public long getTourCount() {
+    return tourRepository.count();
+  }
 }

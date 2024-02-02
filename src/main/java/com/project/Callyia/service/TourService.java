@@ -57,4 +57,6 @@ public interface TourService {
   boolean isPlaceNameExists(String placeName);
 
   boolean isAddressExists(String address);
+
+  long getTourCount();
 }
