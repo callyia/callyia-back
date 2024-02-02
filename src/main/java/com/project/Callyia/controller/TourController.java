@@ -78,4 +78,9 @@ public class TourController {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @GetMapping("/getCount")
+  public ResponseEntity<Long> getCount() {
+    return new ResponseEntity<>(tourService.getTourCount(), HttpStatus.OK);
+  }
 }
