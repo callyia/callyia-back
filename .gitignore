@@ -14,9 +14,9 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-application-aws.properties
-application-database.properties
-application-jwt.properties
+**/application-aws.properties
+**/application-database.properties
+**/application-jwt.properties
 
 .idea
 *.iws
