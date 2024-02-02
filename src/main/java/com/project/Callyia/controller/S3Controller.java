@@ -69,21 +69,31 @@ public class S3Controller {
   public ResponseEntity<List<String>> handleImagePosting(@RequestParam("file") List<MultipartFile> files){
     String bucketName = "callyia";
     String folderName = "Image_Posting";
+    boolean isFileEmpty = false;
 
     List<String> responsePath = new ArrayList<>();
 
     for (MultipartFile file : files) {
-      String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-
-      uploadFileToS3(bucketName, folderName, fileName, file);
-
-      String imagePath = generateImageUrl(bucketName, folderName, fileName);
-
-      responsePath.add(imagePath);
+      if(file.getOriginalFilename().equals(""))
+        isFileEmpty = true;
     }
 
-    log.info(responsePath);
-    return ResponseEntity.ok(responsePath);
+    if(!isFileEmpty) {
+      for (MultipartFile file : files) {
+
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+        uploadFileToS3(bucketName, folderName, fileName, file);
+
+        String imagePath = generateImageUrl(bucketName, folderName, fileName);
+
+        responsePath.add(imagePath);
+      }
+
+      log.info(responsePath);
+      return ResponseEntity.ok(responsePath);
+    } else
+      return ResponseEntity.ok(null);
   }
 
 
