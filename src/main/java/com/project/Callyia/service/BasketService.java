@@ -32,7 +32,7 @@ public interface BasketService {
 
   Long handleBasketRegistration(BasketDTO basketDTO);
 
-//  boolean isPlaceIdExists(Tour placeId);
+  boolean isPlaceIdExists(Long placeId);
 
   List<BasketDTO> getFromEmail(String email);
 }

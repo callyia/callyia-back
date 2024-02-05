@@ -76,4 +76,15 @@ public class MemberServiceImpl implements MemberService{
     memberRepository.delete(member);
   }
 
+  @Override
+  public MemberDTO modifyMember(MemberDTO memberDTO) {
+    Member member = memberRepository.findById(memberDTO.getEmail())
+        .orElseThrow(() -> new RuntimeException("멤버 없음"));
+
+    member.setNickname(memberDTO.getNickname());
+    member.setName(memberDTO.getName());
+    member.setPhone(memberDTO.getPhone());
+    member = memberRepository.save(member);
+    return entityToDTO(member);
+  }
 }

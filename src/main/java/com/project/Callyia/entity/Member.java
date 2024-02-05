@@ -32,6 +32,12 @@ public class Member {
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();
 
+    public void setNickname(String nickname) { this.nickname = nickname; }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setPhone(String phone) {this.phone = phone; }
+
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
