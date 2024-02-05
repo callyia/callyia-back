@@ -69,16 +69,24 @@ public class S3Controller {
   public ResponseEntity<List<String>> handleImagePosting(@RequestParam("file") List<MultipartFile> files){
     String bucketName = "callyia";
     String folderName = "Image_Posting";
-    boolean isFileEmpty = false;
+    boolean isFileNotPermit = false;
 
     List<String> responsePath = new ArrayList<>();
 
     for (MultipartFile file : files) {
-      if(file.getOriginalFilename().equals(""))
-        isFileEmpty = true;
+      if(file.getOriginalFilename().equals("")) {
+        log.info("S3 :: 파일 첨부 없음");
+        isFileNotPermit = true;
+      }
+      if(!file.getContentType().startsWith("image")) {
+        log.info("S3 :: 이미지 파일 아님");
+        isFileNotPermit = true;
+      }
     }
 
-    if(!isFileEmpty) {
+    log.info("isFileNotPermit :: " + isFileNotPermit);
+
+    if(!isFileNotPermit) {
       for (MultipartFile file : files) {
 
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -92,10 +100,10 @@ public class S3Controller {
 
       log.info(responsePath);
       return ResponseEntity.ok(responsePath);
-    } else
+    } else {
       return ResponseEntity.ok(null);
+    }
   }
-
 
 
   private String generateImageUrl(String bucketName, String folderName, String fileName) {
