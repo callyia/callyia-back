@@ -68,12 +68,4 @@ public class MemberServiceImpl implements MemberService{
             .map(member -> entityToDTO(member)).collect(Collectors.toList());
     return memberDTOList;
   }
-
-
-  @Override
-  public void deleteMember(String email) {
-    Member member = memberRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("삭제할 회원이 존재하지 않습니다.."));
-    memberRepository.delete(member);
-  }
-
 }

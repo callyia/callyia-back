@@ -11,8 +11,6 @@ import java.util.List;
 public interface TourRepository extends JpaRepository<Tour, Long> {
   boolean existsByPlaceName(String placeName);
 
-  boolean existsByAddress(String address);
-
   Tour findByPlaceId(Long placeId);
 
   @Query("select t from Tour t where t.placeName like %:placeName% ")

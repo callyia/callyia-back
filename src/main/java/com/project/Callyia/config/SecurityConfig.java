@@ -30,9 +30,9 @@ public class SecurityConfig {
 
     // 액세스를 허용하는 주소들을 등록
     private static final String[] AUTH_WHITELIST = {
-        "/", "/auth/login", "/member/auth", "/member/upload", "/member/deleteMember", "/Tour/all", "/Tour/search", "/planning/search","/basket",
+        "/", "/auth/login", "/member/auth", "/member/upload", "/Tour/all", "/Tour/search", "/planning/search","/basket",
         "/Tour",
-        "/Tour/upload/**",
+        "/Tour/upload",
         "/planning/getDB",
         "/planning/getDay",
         "/planning/getPlan",
@@ -43,7 +43,6 @@ public class SecurityConfig {
         "/Schedule/register",
         "/Schedule/modify",
         "/Schedule/delete",
-        "/s3/profile/**",
     };
 
     private static final String[] USER_AUTH_WHITELIST = {
@@ -74,6 +73,10 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(auth -> {
             log.info("auth>>" + auth);
             auth.requestMatchers(AUTH_WHITELIST).permitAll() // 시큐리티 없이 접근 가능하도록 등록
+                .requestMatchers("/geiowgl").hasRole("USER")
+                .requestMatchers(USER_AUTH_WHITELIST).access(
+                    // 복수개의 권한을 등록할 때
+                    new WebExpressionAuthorizationManager("hasAnyRole('ADMIN','USER')"))
                 .anyRequest().permitAll(); // 그외는 모두 접근 금지
         });
         httpSecurity.csrf(new Customizer<CsrfConfigurer<HttpSecurity>>() {

@@ -63,6 +63,4 @@ public interface MemberService {
 
   MemberDTO updateMember(MemberDTO memberDTO);
   List<MemberDTO> getAllMember();
-
-  void deleteMember(String email);
 }
