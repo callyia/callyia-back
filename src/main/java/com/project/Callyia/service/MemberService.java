@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.MemberDTO;
+import com.project.Callyia.dto.ReplyDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.MemberRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,18 @@ public interface MemberService {
 
   public boolean isEmailExists(String email);
 
+  public boolean isNicknameExists(String nickname);
+
+  public boolean isPhoneExists(String phone);
+
   MemberDTO getMember(String email);
+
+  MemberDTO getNickname(String nickname);
+
+  MemberDTO getPhone(String nickname);
 
   MemberDTO updateMember(MemberDTO memberDTO);
   List<MemberDTO> getAllMember();
+
+  void modify(MemberDTO memberDTO);
 }

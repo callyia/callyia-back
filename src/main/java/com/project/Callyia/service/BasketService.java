@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.BasketDTO;
+import com.project.Callyia.dto.ReplyDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Tour;
 import com.project.Callyia.entity.Basket;
@@ -26,6 +27,8 @@ public interface BasketService {
         .bno(basket.getBno())
         .placeId(basket.getTour().getPlaceId())
         .userId(basket.getMember().getEmail())
+        .placeName(basket.getTour().getPlaceName())
+        .image(basket.getTour().getImage())
         .build();
     return basketDTO;
   }
@@ -35,4 +38,7 @@ public interface BasketService {
 //  boolean isPlaceIdExists(Tour placeId);
 
   List<BasketDTO> getFromEmail(String email);
+
+
+  void remove(Long bno);
 }
