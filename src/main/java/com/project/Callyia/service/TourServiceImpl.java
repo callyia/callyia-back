@@ -144,4 +144,14 @@ public class TourServiceImpl implements TourService{
   public boolean isPlaceNameExists(String placeName) {
     return tourRepository.existsByPlaceName(placeName);
   }
+
+  @Override
+  public boolean isAddressExists(String address) {
+    return tourRepository.existsByAddress(address);
+  }
+
+  @Override
+  public long getTourCount() {
+    return tourRepository.count();
+  }
 }
