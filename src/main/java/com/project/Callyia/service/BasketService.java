@@ -26,6 +26,8 @@ public interface BasketService {
         .bno(basket.getBno())
         .placeId(basket.getTour().getPlaceId())
         .userId(basket.getMember().getEmail())
+        .placeName(basket.getTour().getPlaceName())
+        .image(basket.getTour().getImage())
         .build();
     return basketDTO;
   }
@@ -35,4 +37,6 @@ public interface BasketService {
   boolean isPlaceIdExists(Long placeId);
 
   List<BasketDTO> getFromEmail(String email);
+
+  void remove(Long bno);
 }

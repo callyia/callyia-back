@@ -31,6 +31,16 @@ public class MemberServiceImpl implements MemberService{
   }
 
   @Override
+  public boolean isNicknameExists(String nickname) {
+    return memberRepository.existsByNickname(nickname);
+  }
+
+  @Override
+  public boolean isPhoneExists(String phone) {
+    return memberRepository.existsByPhone(phone);
+  }
+
+  @Override
   public MemberDTO getMember(String email) {
     Member member = memberRepository.findByEmail(email).orElse(null);
     return entityToDTO(member);
@@ -86,5 +96,26 @@ public class MemberServiceImpl implements MemberService{
     member.setPhone(memberDTO.getPhone());
     member = memberRepository.save(member);
     return entityToDTO(member);
+  }
+
+
+  @Override
+  public MemberDTO getNickname(String nickname) {
+    Member member = memberRepository.findByNickname(nickname).orElse(null);
+    return entityToDTO(member);
+  }
+
+  @Override
+  public MemberDTO getPhone(String phone) {
+    Member member = memberRepository.findByPhone(phone).orElse(null);
+    return entityToDTO(member);
+  }
+
+  @Override
+  public void modify(MemberDTO memberDTO) {
+    Member member = memberRepository.findByEmail(memberDTO.getEmail()).orElse(null);
+
+    member.setPassword(memberDTO.getPassword());
+    memberRepository.save(member);
   }
 }
