@@ -36,9 +36,4 @@ public class BasketServiceImpl implements BasketService {
 
     return baskets;
   }
-
-  @Override
-  public void remove(Long bno) {
-    basketRepository.deleteById(bno);
-  }
 }
