@@ -34,10 +34,6 @@ import java.util.Map;
 public class TourController {
   private final TourService tourService;
 
-  //aws s3 사용시 활성화
-//  @Autowired
-//  private S3Client s3Client;
-
   @GetMapping("/all")
   public ResponseEntity<Page<TourDTO>> getAllTours(@RequestParam(defaultValue = "1") int page,
                                                    @RequestParam(defaultValue = "12") int size) {
@@ -70,7 +66,7 @@ public class TourController {
   @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> handleTourRegistration(@RequestBody TourDTO tourDTO) {
     try {
-      if(tourService.isPlaceNameExists(tourDTO.getPlaceName())){
+      if(tourService.isPlaceNameExists(tourDTO.getPlaceName()) && tourService.isAddressExists(tourDTO.getAddress())){
         log.warn("투어 등록 실패: 중복된 placeName입니다.");
         return new ResponseEntity<>(HttpStatus.CONFLICT);
       }
@@ -83,67 +79,8 @@ public class TourController {
     }
   }
 
-  @PostMapping("/upload")
-  public ResponseEntity<Map<String, String>> handleImageUpload(@RequestParam("file") MultipartFile file) {
-    // 이미지를 저장할 경로 설정
-    // aws s3 쓰면 수정할 예정
-    String uploadPath = "src/main/resources/static/uploads/";
-
-    // 고유한 파일 이름 생성
-    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-
-
-    // 이미지 저장 경로 반환
-    // aws s3 경로로 변경할 예정
-//    String imagePath = "/Callyia/static/uploads/" + fileName;
-    String imagePathDummy = "https://deepdaive.com/wp-content/uploads/2023/10/image-12.png";
-    Map<String, String> responseMap = new HashMap<>();
-//    responseMap.put("imagePath", imagePath);
-    responseMap.put("imagePath", imagePathDummy);
-
-    return ResponseEntity.ok(responseMap);
+  @GetMapping("/getCount")
+  public ResponseEntity<Long> getCount() {
+    return new ResponseEntity<>(tourService.getTourCount(), HttpStatus.OK);
   }
-
-  //aws s3 사용시 활성화
-//  @PostMapping("/upload")
-//  public ResponseEntity<Map<String, String>> handleImageUpload(@RequestParam("file") MultipartFile file) {
-//    String bucketName = "callyia";
-//    String folderName = "Image_Upload";
-//
-//// 고유한 파일 이름 생성
-//    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-//
-//    uploadFileToS3(bucketName, folderName, fileName, file);
-//
-//    String imageUrl = generateImageUrl(bucketName, folderName, fileName);
-//
-//    Map<String, String> responseMap = new HashMap<>();
-//    responseMap.put("imageUrl", imageUrl);
-//
-//
-//
-//    return ResponseEntity.ok(responseMap);
-//  }
-//
-//
-//
-//  private String generateImageUrl(String bucketName, String folderName, String fileName) {
-//    // S3에 업로드된 이미지 URL 생성
-//    return "https://" + bucketName + ".s3.amazonaws.com/" + folderName + "/" + fileName;
-//  }
-//
-//  private void uploadFileToS3(String bucketName, String folderName, String fileName, MultipartFile file) {
-//    try {
-//      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-//              .bucket(bucketName)
-//              .key(folderName + "/" + fileName)
-//              .build();
-//
-//      // 파일 데이터를 S3에 업로드
-//      s3Client.putObject(putObjectRequest, software.amazon.awssdk.core.sync.RequestBody.fromBytes(file.getBytes()));
-//    } catch (IOException e){
-//      e.printStackTrace();
-//    }
-//  }
-
 }

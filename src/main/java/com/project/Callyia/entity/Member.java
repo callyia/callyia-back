@@ -12,7 +12,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
 @ToString
 public class Member {

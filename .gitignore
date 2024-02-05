@@ -13,8 +13,9 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-application-aws.properties
+src/main/resources/application-aws.properties
+src/main/resources/application-database.properties
+src/main/resources/application-jwt.properties
 
 .idea
 *.iws
@@ -33,9 +34,4 @@ build/
 
 ### VS Code ###
 .vscode/
-
-
-# AWS Credentials
-cloud.aws.credentials.accessKey
-cloud.aws.credentials.secretKey
 

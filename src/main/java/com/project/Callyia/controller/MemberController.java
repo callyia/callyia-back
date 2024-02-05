@@ -34,26 +34,26 @@ public class MemberController {
   private final PlanService planService;
 
   @PostMapping("/auth")
-  public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO) {
-    try {
-      if (memberService.isEmailExists(memberDTO.getEmail()) || memberService.isPhoneExists(memberDTO.getPhone()) ||memberService.isNicknameExists(memberDTO.getNickname())) {
+  public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
+    try{
+      if(memberService.isEmailExists(memberDTO.getEmail())){
         return new ResponseEntity<>(HttpStatus.CONFLICT);
       }
       String email = memberService.handleMemberRegistration(memberDTO);
       return new ResponseEntity<>(email, HttpStatus.OK);
-    } catch (Exception e) {
+    } catch (Exception e){
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   @PostMapping("/upload")
-  public ResponseEntity<Map<String, String>> handleProfileImageUpload(@RequestParam("profileImage") MultipartFile file) {
+  public ResponseEntity<Map<String, String>> handleProfileImageUpload(@RequestParam("profileImage")MultipartFile file) {
     try {
       String imagePathDummy = "https://thumb.mtstarnews.com/06/2023/06/2023061710001286729_1.jpg/dims/optimize";
       Map<String, String> responseMap = new HashMap<>();
       responseMap.put("imagePath", imagePathDummy);
       return ResponseEntity.ok(responseMap);
-    } catch (Exception e) {
+    } catch (Exception e){
       log.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>", e);
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -62,20 +62,6 @@ public class MemberController {
   @GetMapping("/user")
   public ResponseEntity<MemberDTO> getMember(@RequestParam String email) {
     MemberDTO memberDTO = memberService.getMember(email);
-
-    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-  }
-
-  @GetMapping("/getNickname")
-  public ResponseEntity<MemberDTO> getNickname(@RequestParam String nickname) {
-    MemberDTO memberDTO = memberService.getNickname(nickname);
-
-    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-  }
-
-  @GetMapping("/getPhone")
-  public ResponseEntity<MemberDTO> getPhone(@RequestParam String phone) {
-    MemberDTO memberDTO = memberService.getPhone(phone);
 
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
   }
@@ -98,22 +84,23 @@ public class MemberController {
     log.info(snoList);
 
     List<String> imageList = snoList.stream().map(sno ->
-            detailScheduleService.findDetailScheduleFirst(sno).getDetailImages()
+      detailScheduleService.findDetailScheduleFirst(sno).getDetailImages()
     ).collect(Collectors.toList());
 
 
     List<ScheduleThumbnailRequestDTO> scheduleThumbnailRequestDTOs = new ArrayList<>();
-    for (int i = 0; i < scheduleDTOs.size(); i++) {
+    for(int i=0;i<scheduleDTOs.size();i++) {
       scheduleThumbnailRequestDTOs.add(new ScheduleThumbnailRequestDTO(scheduleDTOs.get(i), imageList.get(i)));
     }
 
-    for (ScheduleThumbnailRequestDTO s : scheduleThumbnailRequestDTOs) {
+    for(ScheduleThumbnailRequestDTO s : scheduleThumbnailRequestDTOs) {
       log.info(s.getScheduleDTO());
       log.info(s.getImage());
     }
 
 
     MemberRequestDTO memberRequestDTO = new MemberRequestDTO(memberDTO, scheduleThumbnailRequestDTOs);
+
 
 
     return new ResponseEntity<>(memberRequestDTO, HttpStatus.OK);
@@ -133,7 +120,6 @@ public class MemberController {
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
   }
 
-
   @DeleteMapping("/deleteMember")
   public ResponseEntity<MemberDTO> deleteMember(@RequestParam String email) {
     memberService.deleteMember(email);
@@ -145,12 +131,5 @@ public class MemberController {
     MemberDTO memberDTO = memberService.getMember(email);
 
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-  }
-
-  @PutMapping("/modifyPassword")
-  public ResponseEntity<String> modifyPassword(@RequestBody MemberDTO memberDTO) {
-    memberService.modify(memberDTO);
-    return new ResponseEntity<>(memberDTO.getEmail(), HttpStatus.OK);
-
   }
 }
