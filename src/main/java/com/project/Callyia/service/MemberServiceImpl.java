@@ -4,6 +4,7 @@ import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.MemberDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Plan;
+import com.project.Callyia.entity.Reply;
 import com.project.Callyia.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,6 +29,16 @@ public class MemberServiceImpl implements MemberService{
   @Override
   public boolean isEmailExists(String email) {
     return memberRepository.existsByEmail(email);
+  }
+
+  @Override
+  public boolean isNicknameExists(String nickname) {
+    return memberRepository.existsByNickname(nickname);
+  }
+
+  @Override
+  public boolean isPhoneExists(String phone) {
+    return memberRepository.existsByPhone(phone);
   }
 
   @Override
@@ -68,4 +79,33 @@ public class MemberServiceImpl implements MemberService{
             .map(member -> entityToDTO(member)).collect(Collectors.toList());
     return memberDTOList;
   }
+
+
+  @Override
+  public void deleteMember(String email) {
+    Member member = memberRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("삭제할 회원이 존재하지 않습니다.."));
+    memberRepository.delete(member);
+  }
+
+
+  @Override
+  public MemberDTO getNickname(String nickname) {
+    Member member = memberRepository.findByNickname(nickname).orElse(null);
+    return entityToDTO(member);
+  }
+
+  @Override
+  public MemberDTO getPhone(String phone) {
+    Member member = memberRepository.findByPhone(phone).orElse(null);
+    return entityToDTO(member);
+  }
+
+  @Override
+  public void modify(MemberDTO memberDTO) {
+    Member member = memberRepository.findByEmail(memberDTO.getEmail()).orElse(null);
+
+    member.setPassword(memberDTO.getPassword());
+    memberRepository.save(member);
+  }
+
 }
