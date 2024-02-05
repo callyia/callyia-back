@@ -59,7 +59,15 @@ public interface MemberService {
 
   public boolean isEmailExists(String email);
 
+  public boolean isNicknameExists(String nickname);
+
+  public boolean isPhoneExists(String phone);
+
   MemberDTO getMember(String email);
+
+  MemberDTO getNickname(String nickname);
+
+  MemberDTO getPhone(String nickname);
 
   MemberDTO updateMember(MemberDTO memberDTO);
   List<MemberDTO> getAllMember();
@@ -67,4 +75,6 @@ public interface MemberService {
   void deleteMember(String email);
 
   MemberDTO modifyMember(MemberDTO memberDTO);
+
+  void modify(MemberDTO memberDTO);
 }

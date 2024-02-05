@@ -51,4 +51,22 @@ public class BasketController {
 
     return new ResponseEntity<>(tourDTOs, HttpStatus.OK);
   }
+
+  @GetMapping("/getBasketPosting")
+  public ResponseEntity<List<BasketDTO>> getBasketPosting(@RequestParam String email) {
+    List<BasketDTO> basketDTOs = basketService.getFromEmail(email);
+    return new ResponseEntity<>(basketDTOs, HttpStatus.OK);
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity<Long> registerBasket(@RequestBody BasketDTO basketDTO) {
+    Long bno = basketService.handleBasketRegistration(basketDTO);
+    return new ResponseEntity<>(bno, HttpStatus.OK);
+  }
+
+  @DeleteMapping("delete/{bno}")
+  public ResponseEntity<String> removeReply(@PathVariable("bno") Long bno) {
+    basketService.remove(bno);
+    return new ResponseEntity<>(bno+"", HttpStatus.OK);
+  }
 }

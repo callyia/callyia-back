@@ -36,7 +36,7 @@ public class MemberController {
   @PostMapping("/auth")
   public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
     try{
-      if(memberService.isEmailExists(memberDTO.getEmail())){
+      if (memberService.isEmailExists(memberDTO.getEmail()) || memberService.isPhoneExists(memberDTO.getPhone()) ||memberService.isNicknameExists(memberDTO.getNickname())){
         return new ResponseEntity<>(HttpStatus.CONFLICT);
       }
       String email = memberService.handleMemberRegistration(memberDTO);
@@ -65,7 +65,19 @@ public class MemberController {
 
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
   }
+  @GetMapping("/getNickname")
+  public ResponseEntity<MemberDTO> getNickname(@RequestParam String nickname) {
+    MemberDTO memberDTO = memberService.getNickname(nickname);
 
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
+
+  @GetMapping("/getPhone")
+  public ResponseEntity<MemberDTO> getPhone(@RequestParam String phone) {
+    MemberDTO memberDTO = memberService.getPhone(phone);
+
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
   @GetMapping("/getAll")
   public ResponseEntity<List<MemberDTO>> getAllMember() {
     List<MemberDTO> memberDTOList = memberService.getAllMember();
@@ -139,5 +151,11 @@ public class MemberController {
   public ResponseEntity<MemberDTO> modify(@RequestBody MemberDTO memberDTO) {
     MemberDTO modifyMemberDTO = memberService.modifyMember(memberDTO);
     return  new ResponseEntity<>(modifyMemberDTO, HttpStatus.OK);
+  }
+
+  @PutMapping("/modifyPassword")
+  public ResponseEntity<String> modifyPassword(@RequestBody MemberDTO memberDTO) {
+    memberService.modify(memberDTO);
+    return new ResponseEntity<>(memberDTO.getEmail(), HttpStatus.OK);
   }
 }
