@@ -1,7 +1,6 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.BasketDTO;
-import com.project.Callyia.entity.Tour;
 import com.project.Callyia.entity.Basket;
 import com.project.Callyia.repository.BasketRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +24,10 @@ public class BasketServiceImpl implements BasketService {
     return basket.getBno();
   }
 
-//  @Override
-//  public boolean isPlaceIdExists(Tour placeId) {
-//    return basketRepository.existsByPlaceId(placeId);
-//  }
+  @Override
+  public boolean isPlaceIdExists(Long placeId) {
+    return basketRepository.existsByTourPlaceId(placeId);
+  }
 
   @Override
   public List<BasketDTO> getFromEmail(String email) {

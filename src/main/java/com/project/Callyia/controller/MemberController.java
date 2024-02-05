@@ -113,12 +113,7 @@ public class MemberController {
     return new ResponseEntity<>(planDTOs, HttpStatus.OK);
   }
 
-  @PutMapping("/updateMember")
-  public ResponseEntity<MemberDTO> PutMemberPage(@RequestBody MemberDTO memberDTO) {
-    MemberDTO updateMemberDTO = memberService.updateMember(memberDTO);
 
-    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-  }
 
   @DeleteMapping("/deleteMember")
   public ResponseEntity<MemberDTO> deleteMember(@RequestParam String email) {
@@ -131,5 +126,18 @@ public class MemberController {
     MemberDTO memberDTO = memberService.getMember(email);
 
     return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
+
+  @PutMapping("/updateMember")
+  public ResponseEntity<MemberDTO> PutMemberPage(@RequestBody MemberDTO memberDTO) {
+    MemberDTO updateMemberDTO = memberService.updateMember(memberDTO);
+
+    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+  }
+
+  @PutMapping("/modify")
+  public ResponseEntity<MemberDTO> modify(@RequestBody MemberDTO memberDTO) {
+    MemberDTO modifyMemberDTO = memberService.modifyMember(memberDTO);
+    return  new ResponseEntity<>(modifyMemberDTO, HttpStatus.OK);
   }
 }

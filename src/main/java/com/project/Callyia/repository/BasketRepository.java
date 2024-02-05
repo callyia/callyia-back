@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BasketRepository extends JpaRepository<Basket, Long> {
-//  boolean existsByPlaceId(Tour placeId);
+  boolean existsByTourPlaceId(Long placeId);
 
   List<Basket> findByMember_email(String email);
 }

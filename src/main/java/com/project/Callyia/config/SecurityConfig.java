@@ -47,7 +47,7 @@ public class SecurityConfig {
     };
 
     private static final String[] USER_AUTH_WHITELIST = {
-        "/basket",
+        "/Basket",
         "/Tour",
         "/Tour/upload",
         "/planning/getDB",
@@ -60,6 +60,7 @@ public class SecurityConfig {
         "/Schedule/register",
         "/Schedule/modify",
         "/Schedule/delete",
+        "/member/deleteMember",
     };
 
     @Bean
