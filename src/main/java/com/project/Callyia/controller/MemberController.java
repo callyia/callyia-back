@@ -148,9 +148,31 @@ public class MemberController {
   }
 
   @PutMapping("/modify")
-  public ResponseEntity<MemberDTO> modify(@RequestBody MemberDTO memberDTO) {
-    MemberDTO modifyMemberDTO = memberService.modifyMember(memberDTO);
-    return  new ResponseEntity<>(modifyMemberDTO, HttpStatus.OK);
+  public ResponseEntity<?> modify(@RequestBody MemberDTO memberDTO, @RequestParam String email) {
+    try{
+      Map<String, String> responseMap = new HashMap<>();
+
+      if (!memberService.isNoModifyPhone(memberDTO.getPhone(), email)) {
+        if(memberService.isPhoneExists(memberDTO.getPhone())) {
+          responseMap.put("phone", "Phone number already exists");
+        }
+      }
+      if (!memberService.isNoModifyNickname(memberDTO.getNickname(), email)) {
+        if(memberService.isNicknameExists(memberDTO.getNickname())){
+          responseMap.put("nickname", "Nickname already exists");
+        }
+      }
+
+      if (!responseMap.isEmpty()) {
+        return new ResponseEntity<>(responseMap, HttpStatus.CONFLICT);
+      }
+
+      MemberDTO modifyMemberDTO = memberService.modifyMember(memberDTO);
+      return  new ResponseEntity<>(modifyMemberDTO, HttpStatus.OK);
+    } catch (Exception e){
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
   }
 
   @PutMapping("/modifyPassword")

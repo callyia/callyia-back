@@ -120,4 +120,14 @@ public class MemberServiceImpl implements MemberService{
     member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
     memberRepository.save(member);
   }
+
+  @Override
+  public boolean isNoModifyPhone(String phone, String email) {
+    return memberRepository.NoModifyPhone(phone, email);
+  }
+
+  @Override
+  public boolean isNoModifyNickname(String nickname, String email) {
+    return memberRepository.NoModifyNickname(nickname, email);
+  }
 }
