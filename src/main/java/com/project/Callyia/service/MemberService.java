@@ -77,4 +77,8 @@ public interface MemberService {
   MemberDTO modifyMember(MemberDTO memberDTO);
 
   void modify(MemberDTO memberDTO);
+
+  boolean isNoModifyPhone(String phone, String email);
+
+  boolean isNoModifyNickname(String nickname, String email);
 }

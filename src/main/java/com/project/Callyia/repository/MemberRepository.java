@@ -23,4 +23,10 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
   @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph.EntityGraphType.LOAD)
   Optional<Member> findById(String email);
+
+  @Query("SELECT COUNT(m) > 0 FROM Member m WHERE m.email = :email AND m.phone = :phone")
+  boolean NoModifyPhone(String phone, String email);
+
+  @Query("SELECT COUNT(m) > 0 FROM Member m WHERE m.email = :email AND m.nickname = :nickname")
+  boolean NoModifyNickname(String nickname, String email);
 }
