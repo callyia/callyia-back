@@ -7,6 +7,7 @@ import com.project.Callyia.entity.Plan;
 import com.project.Callyia.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
   private final MemberRepository memberRepository;
+  private final BCryptPasswordEncoder passwordEncoder;
 
   @Override
   public String handleMemberRegistration(MemberDTO memberDTO) {
@@ -115,7 +117,8 @@ public class MemberServiceImpl implements MemberService{
   public void modify(MemberDTO memberDTO) {
     Member member = memberRepository.findByEmail(memberDTO.getEmail()).orElse(null);
 
-    member.setPassword(memberDTO.getPassword());
+    member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+//    member.setPassword(memberDTO.getPassword());
     memberRepository.save(member);
   }
 }
