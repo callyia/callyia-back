@@ -1,7 +1,10 @@
 package com.project.Callyia.repository;
 
 import com.project.Callyia.entity.DetailSchedule;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 
 import java.util.List;
@@ -13,4 +16,7 @@ public interface DetailScheduleRepository extends JpaRepository<DetailSchedule, 
     List<DetailSchedule> findBySchedule_sno(Long sno);
 
     DetailSchedule findFirstBySchedule_sno(Long sno);
+
+    @Query("SELECT ds FROM DetailSchedule ds WHERE ds.tour.placeId = :placeId")
+    Page<DetailSchedule> findByPlaceId(String placeId, Pageable pageable);
 }

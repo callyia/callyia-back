@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -123,6 +126,13 @@ public class ScheduleController {
         return new ResponseEntity<>(updatedReplyList, HttpStatus.OK);
     }
 
+    @GetMapping("getTip")
+    public ResponseEntity<Page<DetailScheduleDTO>> getTip(@RequestParam String placeId, @RequestParam(defaultValue = "1") int page) {
+        Pageable pageable = PageRequest.of(page -1, 10);
+        Page<DetailScheduleDTO> detailScheduleDTOPage = detailScheduleService.getTip(placeId, pageable);
+        return new ResponseEntity<>(detailScheduleDTOPage, HttpStatus.OK);
+    }
+
     //댓글 등록
     @PostMapping("/register")
     public ResponseEntity<Long> registerReply(@RequestBody ReplyDTO replyDTO) {
@@ -154,6 +164,7 @@ public class ScheduleController {
 
 
     //장바구니 삭제
+
 
 
 }
