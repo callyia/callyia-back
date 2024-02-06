@@ -5,6 +5,8 @@ import com.project.Callyia.dto.ScheduleDTO;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.entity.Tour;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -27,4 +29,6 @@ public interface DetailScheduleService {
 
 
     DetailScheduleDTO findDetailScheduleFirst(Long sno);
+
+    Page<DetailScheduleDTO> getTip(String placeId, Pageable pageable);
 }

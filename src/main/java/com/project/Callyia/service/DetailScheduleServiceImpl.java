@@ -7,6 +7,8 @@ import com.project.Callyia.entity.Tour;
 import com.project.Callyia.repository.DetailScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -85,4 +87,9 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
         return entityToDTO(detailSchedule);
     }
 
+    @Override
+    public Page<DetailScheduleDTO> getTip(String placeId, Pageable pageable) {
+        Page<DetailSchedule> detailSchedulePage = detailScheduleRepository.findByPlaceId(placeId, pageable);
+        return detailSchedulePage.map(this::entityToDTO);
+    }
 }
