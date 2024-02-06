@@ -118,7 +118,6 @@ public class MemberServiceImpl implements MemberService{
     Member member = memberRepository.findByEmail(memberDTO.getEmail()).orElse(null);
 
     member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
-//    member.setPassword(memberDTO.getPassword());
     memberRepository.save(member);
   }
 }
