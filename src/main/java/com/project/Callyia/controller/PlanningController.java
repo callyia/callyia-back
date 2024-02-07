@@ -111,4 +111,13 @@ public class PlanningController {
 
     return new ResponseEntity<>(sno, HttpStatus.OK);
   }
+
+  @DeleteMapping("/delete/{pno}")
+  public ResponseEntity<String> deletePlan(@PathVariable Long pno) {
+
+    planDetailService.deleteByPno(pno);
+    boolean success = planService.deletePlan(pno);
+
+    return ResponseEntity.ok("success");
+  }
 }
