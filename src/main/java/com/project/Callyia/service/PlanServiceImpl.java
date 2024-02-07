@@ -6,8 +6,10 @@ import com.project.Callyia.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,5 +52,17 @@ public class PlanServiceImpl implements PlanService {
     List<PlanDTO> planDTOs = plans.stream().map(plan -> entityToDTO(plan)).collect(Collectors.toList());
 
     return planDTOs;
+  }
+
+  @Override
+  public boolean deletePlan(Long pno) {
+
+    Optional<Plan> optionalPlan = planRepository.findById(pno);
+
+    if(!optionalPlan.isPresent())
+      return false;
+
+    planRepository.deleteById(pno);
+    return true;
   }
 }

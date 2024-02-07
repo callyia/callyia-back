@@ -3,6 +3,7 @@ package com.project.Callyia.service;
 import com.project.Callyia.dto.PlanDTO;
 import com.project.Callyia.entity.Member;
 import com.project.Callyia.entity.Plan;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,4 +40,7 @@ public interface PlanService {
   PlanDTO getFromPno(Long pno);
 
   List<PlanDTO> getFromEmail(String email);
+
+  @Transactional
+  boolean deletePlan(Long pno);
 }
