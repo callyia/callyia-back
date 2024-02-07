@@ -24,9 +24,15 @@ public class BasketServiceImpl implements BasketService {
     return basket.getBno();
   }
 
+//  @Override
+//  public boolean isPlaceIdExists(BasketDTO basketDTO) {
+//    return basketRepository.existsByTourPlaceId(dtoToEntity(basketDTO));
+//  }
+
+
   @Override
-  public boolean isPlaceIdExists(Long placeId) {
-    return basketRepository.existsByTourPlaceId(placeId);
+  public boolean isPlaceIdExists(Long placeId, String userId) {
+    return basketRepository.existsByBasket(placeId, userId);
   }
 
   @Override
@@ -40,4 +46,9 @@ public class BasketServiceImpl implements BasketService {
     basketRepository.deleteById(bno);
   }
 
+
+  @Override
+  public void deleteBasketByEmail(String email) {
+    basketRepository.deleteByMember_email(email);
+  }
 }

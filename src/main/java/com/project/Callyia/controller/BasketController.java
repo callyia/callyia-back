@@ -28,7 +28,7 @@ public class BasketController {
     log.info(basketDTO.getPlaceId());
     log.info(basketDTO);
     try{
-      if(basketService.isPlaceIdExists(basketDTO.getPlaceId())){
+      if(basketService.isPlaceIdExists(basketDTO.getPlaceId(), basketDTO.getUserId())){
         log.warn("장바구니 등록 실패: 중복된 placeId입니다.");
         return new ResponseEntity<>(HttpStatus.CONFLICT);
       }

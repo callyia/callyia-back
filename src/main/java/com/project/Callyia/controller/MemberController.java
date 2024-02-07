@@ -3,16 +3,16 @@ package com.project.Callyia.controller;
 import com.project.Callyia.dto.*;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Member;
+import com.project.Callyia.entity.Plan;
+import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.repository.MemberRepository;
-import com.project.Callyia.service.DetailScheduleService;
-import com.project.Callyia.service.MemberService;
-import com.project.Callyia.service.PlanService;
-import com.project.Callyia.service.ScheduleService;
+import com.project.Callyia.service.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +32,9 @@ public class MemberController {
   private final ScheduleService scheduleService;
   private final DetailScheduleService detailScheduleService;
   private final PlanService planService;
+  private final BasketService basketService;
+  private final PlanDetailService planDetailService;
+  private final ReplyService replyService;
 
   @PostMapping("/auth")
   public ResponseEntity<String> auth(@RequestBody MemberDTO memberDTO){
@@ -126,9 +129,25 @@ public class MemberController {
   }
 
 
-
+  @Transactional
   @DeleteMapping("/deleteMember")
   public ResponseEntity<MemberDTO> deleteMember(@RequestParam String email) {
+    basketService.deleteBasketByEmail(email);
+    replyService.deleteReplyByEmail(email);
+    List<Schedule> scheduleList = scheduleService.findByMemberEmail(email);
+    for (Schedule schedule : scheduleList) {
+      detailScheduleService.deleteDetailScheduleBySno(schedule.getSno());
+    }
+    for (Schedule schedule : scheduleList) {
+      scheduleService.deleteScheduleBySno(schedule.getSno());
+    }
+    List<Plan> planList = planService.findByMemberEmail(email);
+    for (Plan plan : planList) {
+      planDetailService.deleteByPno(plan.getPno());
+    }
+    for (Plan plan : planList) {
+      planService.deletePlan(plan.getPno());
+    }
     memberService.deleteMember(email);
     return ResponseEntity.ok().build();
   }

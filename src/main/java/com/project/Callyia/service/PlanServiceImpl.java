@@ -65,4 +65,9 @@ public class PlanServiceImpl implements PlanService {
     planRepository.deleteById(pno);
     return true;
   }
+
+  @Override
+  public List<Plan> findByMemberEmail(String email) {
+    return planRepository.findByMember_Email(email);
+  }
 }

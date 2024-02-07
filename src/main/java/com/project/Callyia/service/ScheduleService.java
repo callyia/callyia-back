@@ -52,4 +52,8 @@ public interface ScheduleService {
     List<ScheduleDTO> getSchedulesByEmail(String email);
 
     int getScheduleCountByEmail(String email);
+
+  List<Schedule> findByMemberEmail(String email);
+
+    void deleteScheduleBySno(Long sno);
 }
