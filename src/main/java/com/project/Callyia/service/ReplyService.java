@@ -26,4 +26,6 @@ public interface ReplyService {
 
     //댓글 삭제
     void remove(Long rno);
+
+  void deleteReplyByEmail(String email);
 }

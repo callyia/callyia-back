@@ -83,4 +83,5 @@ public class PlanDetailServiceImpl implements PlanDetailService {
 
     return planDetailDTOList;
   }
+
 }

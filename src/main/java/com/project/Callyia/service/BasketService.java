@@ -34,9 +34,11 @@ public interface BasketService {
 
   Long handleBasketRegistration(BasketDTO basketDTO);
 
-  boolean isPlaceIdExists(Long placeId);
-
   List<BasketDTO> getFromEmail(String email);
 
   void remove(Long bno);
+
+  void deleteBasketByEmail(String email);
+
+  boolean isPlaceIdExists(Long placeId, String userId);
 }

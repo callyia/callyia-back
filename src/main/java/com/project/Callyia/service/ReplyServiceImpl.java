@@ -79,4 +79,10 @@ public class ReplyServiceImpl implements ReplyService{
     public void remove(Long rno) {
         replyRepository.deleteById(rno);
     }
+
+
+    @Override
+    public void deleteReplyByEmail(String email) {
+        replyRepository.deleteByMember_email(email);
+    }
 }

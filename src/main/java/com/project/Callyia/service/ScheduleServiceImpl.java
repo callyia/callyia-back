@@ -92,4 +92,14 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
 
+    @Override
+    public List<Schedule> findByMemberEmail(String email) {
+        List<Schedule> scheduleList = scheduleRepository.findByMember_Email(email);
+        return scheduleList;
+    }
+
+    @Override
+    public void deleteScheduleBySno(Long sno) {
+        scheduleRepository.deleteById(sno);
+    }
 }

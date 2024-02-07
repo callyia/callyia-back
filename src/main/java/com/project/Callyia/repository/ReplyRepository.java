@@ -8,4 +8,6 @@ import java.util.List;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     List<Reply> findByDetailSchedule_dno(Long dno);
+
+  void deleteByMember_email(String email);
 }

@@ -43,4 +43,6 @@ public interface PlanService {
 
   @Transactional
   boolean deletePlan(Long pno);
+
+  List<Plan> findByMemberEmail(String email);
 }

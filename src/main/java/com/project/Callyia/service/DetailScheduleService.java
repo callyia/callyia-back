@@ -31,4 +31,6 @@ public interface DetailScheduleService {
     DetailScheduleDTO findDetailScheduleFirst(Long sno);
 
     Page<DetailScheduleDTO> getTip(String placeId, Pageable pageable);
+
+    void deleteDetailScheduleBySno(Long sno);
 }
