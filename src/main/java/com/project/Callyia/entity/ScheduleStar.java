@@ -3,6 +3,8 @@ package com.project.Callyia.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Builder
@@ -24,4 +26,5 @@ public class ScheduleStar {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
 }

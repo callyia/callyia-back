@@ -1,7 +1,13 @@
 package com.project.Callyia.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -26,5 +32,7 @@ public class DetailSchedule { //세부일정
     @ManyToOne(fetch = FetchType.LAZY)
     private Tour tour;
 
-
+    @OneToMany(mappedBy = "detailSchedule", orphanRemoval = true)
+    @JsonBackReference
+    private List<Reply> replys = new ArrayList<>();
 }
