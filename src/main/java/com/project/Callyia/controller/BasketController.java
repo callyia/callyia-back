@@ -1,11 +1,13 @@
 package com.project.Callyia.controller;
 
 
-import com.project.Callyia.dto.BasketDTO;
-import com.project.Callyia.dto.TourDTO;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.project.Callyia.dto.*;
 import com.project.Callyia.service.BasketService;
 import com.project.Callyia.service.TourService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,14 @@ import java.util.stream.Collectors;
 public class BasketController {
   private final BasketService basketService;
   private final TourService tourService;
+
+  @Setter
+  @Getter
+  @JsonSerialize
+  public class basketTourDTO {
+    private List<BasketDTO> basketDTOList;
+    private List<TourDTO> tourDTOList;
+  }
 
   @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> handleBasketRegistration(@RequestBody BasketDTO basketDTO){
