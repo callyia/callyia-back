@@ -16,4 +16,5 @@ public class BasketDTO {
   private String userId;
   private String placeName;
   private String image;
+  private String address;
 }

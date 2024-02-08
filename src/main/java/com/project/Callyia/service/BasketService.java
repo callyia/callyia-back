@@ -22,12 +22,15 @@ public interface BasketService {
   }
 
   default BasketDTO entityToDTO(Basket basket){
+
+
     BasketDTO basketDTO = BasketDTO.builder()
         .bno(basket.getBno())
         .placeId(basket.getTour().getPlaceId())
         .userId(basket.getMember().getEmail())
         .placeName(basket.getTour().getPlaceName())
         .image(basket.getTour().getImage())
+        .address(basket.getTour().getAddress())
         .build();
     return basketDTO;
   }
