@@ -156,6 +156,14 @@ public class ScheduleController {
         return new ResponseEntity<>(rno+"", HttpStatus.OK);
     }
 
+
+    //스케줄 삭제
+    @DeleteMapping("/deleteSchedule")
+    public ResponseEntity<String> deleteSchedule(@RequestParam Long sno) {
+        scheduleService.deleteScheduleBySno(sno);
+        return new ResponseEntity<>(sno+"", HttpStatus.OK);
+    }
+
 //    //장바구니 추가
 //    @PostMapping("basket")
 //    public ResponseEntity<Long> addBasket(@RequestBody BasketDTO basketDTO) {
