@@ -41,4 +41,6 @@ public interface ScheduleStarService {
     ScheduleStarDTO getStarMember(String email, Long sno);
 
     void modify(ScheduleStarDTO scheduleStarDTO);
+
+    List<ScheduleStarDTO> getAllStar();
 }

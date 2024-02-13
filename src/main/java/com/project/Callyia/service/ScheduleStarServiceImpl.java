@@ -5,6 +5,7 @@ import com.project.Callyia.dto.ReplyDTO;
 import com.project.Callyia.dto.ScheduleDTO;
 import com.project.Callyia.dto.ScheduleStarDTO;
 import com.project.Callyia.entity.Reply;
+import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.entity.ScheduleStar;
 import com.project.Callyia.repository.ScheduleStarRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,14 @@ public class ScheduleStarServiceImpl implements ScheduleStarService{
 
         scheduleStar.setStarScore(scheduleStarDTO.getStarScore());
         scheduleStarRepository.save(scheduleStar);
+    }
+
+    @Override
+    public List<ScheduleStarDTO> getAllStar() {
+        List<ScheduleStar> scheduleStarList = scheduleStarRepository.findAll();
+        List<ScheduleStarDTO> scheduleStarDTOList = (List<ScheduleStarDTO>) scheduleStarList.stream()
+                .map(scheduleStar -> entityToDTO(scheduleStar)).collect(Collectors.toList());
+
+        return scheduleStarDTOList;
     }
 }
