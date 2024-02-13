@@ -17,8 +17,8 @@ public interface DetailScheduleRepository extends JpaRepository<DetailSchedule, 
 
     DetailSchedule findFirstBySchedule_sno(Long sno);
 
-    @Query("SELECT ds FROM DetailSchedule ds WHERE ds.tour.placeId = :placeId")
-    Page<DetailSchedule> findByPlaceId(String placeId, Pageable pageable);
+    @Query("SELECT s.sno, ds.tip, m.nickname FROM DetailSchedule ds JOIN ds.schedule s JOIN s.member m WHERE ds.tour.placeId = :placeId")
+    Page<Object[]> findByPlaceId(String placeId, Pageable pageable);
 
     void deleteBySchedule_sno(Long sno);
 }

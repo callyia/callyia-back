@@ -1,6 +1,7 @@
 package com.project.Callyia.service;
 
 import com.project.Callyia.dto.DetailScheduleDTO;
+import com.project.Callyia.dto.TipDTO;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.entity.Tour;
@@ -89,9 +90,13 @@ public class DetailScheduleServiceImpl implements DetailScheduleService{
     }
 
     @Override
-    public Page<DetailScheduleDTO> getTip(String placeId, Pageable pageable) {
-        Page<DetailSchedule> detailSchedulePage = detailScheduleRepository.findByPlaceId(placeId, pageable);
-        return detailSchedulePage.map(this::entityToDTO);
+    public Page<TipDTO> getTip(String placeId, Pageable pageable) {
+        Page<Object[]> detailSchedulePage = detailScheduleRepository.findByPlaceId(placeId, pageable);
+        return detailSchedulePage.map(objects -> new TipDTO(
+            (Long) objects[0],
+            (String) objects[1],
+            (String) objects[2]
+        ));
     }
 
     @Override

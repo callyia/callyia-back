@@ -40,6 +40,8 @@ public class ScheduleStarController {
         return new ResponseEntity<>(scheduleStarDTO, HttpStatus.OK);
     }
 
+
+
     @PutMapping("/modifyStar")
     public ResponseEntity<Long> modifyStar(@RequestBody ScheduleStarDTO scheduleStarDTO) {
         scheduleStarService.modify(scheduleStarDTO);

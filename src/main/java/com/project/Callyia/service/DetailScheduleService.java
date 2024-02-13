@@ -2,6 +2,7 @@ package com.project.Callyia.service;
 
 import com.project.Callyia.dto.DetailScheduleDTO;
 import com.project.Callyia.dto.ScheduleDTO;
+import com.project.Callyia.dto.TipDTO;
 import com.project.Callyia.entity.DetailSchedule;
 import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.entity.Tour;
@@ -30,7 +31,7 @@ public interface DetailScheduleService {
 
     DetailScheduleDTO findDetailScheduleFirst(Long sno);
 
-    Page<DetailScheduleDTO> getTip(String placeId, Pageable pageable);
+    Page<TipDTO> getTip(String placeId, Pageable pageable);
 
     void deleteDetailScheduleBySno(Long sno);
 }
