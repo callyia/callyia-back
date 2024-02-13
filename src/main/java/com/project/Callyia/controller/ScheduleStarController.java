@@ -27,6 +27,14 @@ public class ScheduleStarController {
         return new ResponseEntity<>(scheduleStarDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/getAllStar")
+    public ResponseEntity<List<ScheduleStarDTO>> getAllStar() {
+        List<ScheduleStarDTO> scheduleStarDTOList = scheduleStarService.getAllStar();
+
+        return new ResponseEntity<>(scheduleStarDTOList, HttpStatus.OK);
+    }
+
+
     @PostMapping("/registerStar")
     public ResponseEntity<Long> registerStar(@RequestBody ScheduleStarDTO scheduleStarDTO) {
         Long starNum = scheduleStarService.registerStar(scheduleStarDTO);
