@@ -102,4 +102,5 @@ public class ScheduleServiceImpl implements ScheduleService{
     public void deleteScheduleBySno(Long sno) {
         scheduleRepository.deleteById(sno);
     }
+
 }

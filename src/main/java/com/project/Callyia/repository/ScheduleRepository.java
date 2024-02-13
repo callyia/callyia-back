@@ -31,5 +31,4 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 //    List<Schedule> getScheduleWithImage(String email);
 
     List<Schedule> findTop6ByOrderByRegDateDesc();
-
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.Callyia.dto.*;
 
 import com.project.Callyia.entity.Reply;
+import com.project.Callyia.entity.Schedule;
 import com.project.Callyia.service.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -127,9 +128,9 @@ public class ScheduleController {
     }
 
     @GetMapping("getTip")
-    public ResponseEntity<Page<DetailScheduleDTO>> getTip(@RequestParam String placeId, @RequestParam(defaultValue = "1") int page) {
+    public ResponseEntity<Page<TipDTO>> getTip(@RequestParam String placeId, @RequestParam(defaultValue = "1") int page) {
         Pageable pageable = PageRequest.of(page -1, 10);
-        Page<DetailScheduleDTO> detailScheduleDTOPage = detailScheduleService.getTip(placeId, pageable);
+        Page<TipDTO> detailScheduleDTOPage = detailScheduleService.getTip(placeId, pageable);
         return new ResponseEntity<>(detailScheduleDTOPage, HttpStatus.OK);
     }
 

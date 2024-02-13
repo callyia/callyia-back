@@ -56,4 +56,5 @@ public interface ScheduleService {
   List<Schedule> findByMemberEmail(String email);
 
     void deleteScheduleBySno(Long sno);
+
 }
